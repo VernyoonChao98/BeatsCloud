@@ -1,0 +1,106 @@
+html {
+  background-color: rgba(51, 51, 51, 0.068);
+}
+
+body {
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #f2f2f2;
+  overflow-y: scroll;
+  justify-content: center;
+}
+
+.wholeContent {
+  display: flex;
+  flex-direction: column;
+  /* overflow: wrap; */
+  background-color: white;
+  color: blue;
+  border-top: 4px solid rgba(255, 85, 0, 1);
+  width: 1240px;
+}
+
+.button {
+  background-color: rgba(255, 85, 0, 1);
+  border: 1px solid rgba(255, 85, 0, 1);
+  color: white;
+  border-radius: 3px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.topImageContainer {
+  display: flex;
+  background-image: url("../../images/BeatsCloud.png");
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-color: black;
+  width: 100%;
+  height: 450px;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  position: absolute;
+  background-image: url("../../images/BeatsCloud.png");
+  transform: translate(-550px, -190px);
+}
+
+.navButtons {
+  position: absolute;
+  display: flex;
+  transform: translate(395px, -190px);
+  justify-content: space-between;
+  width: 217px;
+}
+
+#signUpButton {
+  background-color: rgba(0, 0, 0, 0);
+  padding: 7px 15px;
+  border-color: #ccc;
+}
+
+#createAccountButton {
+  padding: 4px 20px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.text > h2 {
+  margin-bottom: 8px;
+  font-size: 36px;
+  font-weight: 100;
+}
+
+.text > p {
+  margin-bottom: 8px;
+  font-size: 18px;
+  max-width: 550px;
+  text-align: center;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
