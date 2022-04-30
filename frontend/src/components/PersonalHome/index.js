@@ -1,36 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { signup } from "../../store/session";
-import { Route, Switch } from "react-router-dom";
-import { restoreUser } from "../../store/session";
-
-import LoginFormPage from "../LoginFormPage";
-import SignupFormPage from "../SignUpFormPage";
-import Navigation from "..//Navigation";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Redirect, NavLink } from "react-router-dom";
+import Navigation from "./Navigation";
+import "./PersonalHome.css";
 
 function PersonalHome() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(() => {
-    dispatch(restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  if (!sessionUser) return <Redirect to="/" />;
 
   return (
     <div>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
       <h2>PersonalHome</h2>
+      <NavLink exact to="/">
+        Home
+      </NavLink>
+      <Navigation user={sessionUser} />
     </div>
   );
 }

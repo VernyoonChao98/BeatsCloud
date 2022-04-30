@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
+import { useDispatch } from "react-redux";
 
-function ProfileButton({ user }) {
+function Navigation({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -29,21 +29,21 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
+    <div className="navigation">
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
+          <li>{user.username}Hello</li>
           <li>{user.email}</li>
           <li>
             <button onClick={logoutEvent}>Log Out</button>
           </li>
         </ul>
       )}
-    </>
+    </div>
   );
 }
 
-export default ProfileButton;
+export default Navigation;

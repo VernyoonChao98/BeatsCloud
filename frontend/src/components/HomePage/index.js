@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { signup } from "../../store/session";
-import TopImage from "./TopImage";
+import React from "react";
+import TopImage from "./TopImage/TopImage";
 import SearchArea from "./SearchArea";
 import MobileImage from "./MobileImage";
 import SoundCloudTeaser from "./SoundCloudTeaser";
