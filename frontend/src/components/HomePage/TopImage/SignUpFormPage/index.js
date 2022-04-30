@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { signup } from "../../store/session";
+import { signup } from "../../../../store/session";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/myHome" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
