@@ -35,7 +35,7 @@ function Navigation({ user }) {
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}Hello</li>
+          <li>{user.username}</li>
           <li>{user.email}</li>
           <li>
             <button onClick={logoutEvent}>Log Out</button>

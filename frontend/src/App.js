@@ -5,7 +5,6 @@ import { restoreUser } from "./store/session";
 
 import Home from "./components/HomePage";
 import PersonalHome from "./components/PersonalHome";
-import SignupFormPage from "./components/SignUpFormPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,9 +21,6 @@ function App() {
         </Route>
         <Route path="/myHome">
           <PersonalHome />
-        </Route>
-        <Route path="/createAccount">
-          <SignupFormPage />
         </Route>
       </Switch>
     </>
