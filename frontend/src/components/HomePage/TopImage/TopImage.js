@@ -9,9 +9,6 @@ function TopImage() {
       <div className="navButtons">
         <LoginFormModal />
         <CreateAccountModal />
-        {/* <button className="button" id="createAccountButton">
-          Create account
-        </button> */}
       </div>
       <div className="text">
         <h2>Discover more with BeatsCloud Go+</h2>
