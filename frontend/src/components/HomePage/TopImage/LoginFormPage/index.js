@@ -14,6 +14,19 @@ function LoginFormPage() {
 
   if (sessionUser) return <Redirect to="/myHome" />;
 
+  const handleDemoUser = async (e) => {
+    e.preventDefault();
+    setErrors([]);
+
+    const credential = "Demo-lition";
+    const password = "password";
+
+    return dispatch(login({ credential, password })).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -54,6 +67,9 @@ function LoginFormPage() {
           />
         </label>
         <button type="submit">Log In</button>
+      </form>
+      <form onSubmit={handleDemoUser}>
+        <button type="submit">Demo User</button>
       </form>
     </div>
   );
