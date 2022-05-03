@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import { restoreUser } from "../../store/session";
+import { loadAllSongs } from "../../store/uploadFile";
 import Navigation from "./Navigation";
 import UploadButton from "./UploadButton";
 import AudioPlayer from "react-h5-audio-player";
@@ -10,11 +11,11 @@ import "./PersonalHome.css";
 
 function PersonalHome() {
   const sessionUser = useSelector((state) => state.session.user);
-  const dispatch = useDispatch();
+  const [currentAudio, setCurrentAudio] = useState(
+    "https://beatscloudclone.s3.amazonaws.com/1651534605934.mp4"
+  );
 
-  useEffect(() => {
-    dispatch(restoreUser());
-  }, [dispatch]);
+  const dispatch = useDispatch();
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -25,13 +26,17 @@ function PersonalHome() {
         Home
       </NavLink>
       <Navigation user={sessionUser} />
-      <UploadButton />
-      <AudioPlayer
-        autoPlay
-        src=""
-        onPlay={(e) => console.log("onPlay")}
-        // other props here
-      />
+      <UploadButton user={sessionUser} />
+      <footer>
+        <AudioPlayer
+          src={currentAudio}
+          onPlay={(e) =>
+            setCurrentAudio(
+              "https://beatscloudclone.s3.us-west-1.amazonaws.com/1651527807760.mp4"
+            )
+          }
+        />
+      </footer>
     </div>
   );
 }
