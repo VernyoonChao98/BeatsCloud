@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Navigation from "../PersonalHome/Navigation";
+import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { editNewSong } from "../../store/uploadFile";
+import { editNewSong } from "../../store/audioFile";
 
-function EditPage() {
+function EditSongPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const songId = useParams().id;
@@ -42,4 +42,4 @@ function EditPage() {
   );
 }
 
-export default EditPage;
+export default EditSongPage;

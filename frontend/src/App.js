@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { restoreUser } from "./store/session";
-import { loadAllSongs } from "./store/uploadFile";
+import { loadAllSongs } from "./store/audioFile";
+import { loadAllPlaylist } from "./store/playlists";
 
 import Home from "./components/HomePage";
-import PersonalHome from "./components/PersonalHome";
+import PersonalHome from "./components/MyHome";
 import UploadPage from "./components/UploadPage";
-import EditPage from "./components/EditPage";
+import EditSongPage from "./components/EditSongPage";
+import DiscoverPage from "./components/DiscoverPage";
+import PlaylistsPage from "./components/PlaylistsPage";
+import CreatePlaylistPage from "./components/PlaylistsPage/CreatePlaylistsPage";
+import EditPlaylistPage from "./components/EditPlaylistPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +21,7 @@ function App() {
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(loadAllSongs());
+    dispatch(loadAllPlaylist());
   }, [dispatch]);
 
   return (
@@ -25,6 +31,9 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
+          <Route path="/discover">
+            <DiscoverPage />
+          </Route>
           <Route path="/myHome">
             <PersonalHome />
           </Route>
@@ -32,7 +41,16 @@ function App() {
             <UploadPage />
           </Route>
           <Route path="/songs/:id">
-            <EditPage />
+            <EditSongPage />
+          </Route>
+          <Route path="/playlists" exact>
+            <PlaylistsPage />
+          </Route>
+          <Route path="/playlists/create">
+            <CreatePlaylistPage />
+          </Route>
+          <Route path="/playlists/:id">
+            <EditPlaylistPage />
           </Route>
         </Switch>
       </>

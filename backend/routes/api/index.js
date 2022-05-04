@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
-const uploadRouter = require("./upload.js");
+const songsRouter = require("./songs.js");
+const playlistsRouter = require("./playlists");
 
 const asyncHandler = require("express-async-handler");
 const { setTokenCookie } = require("../../utils/auth.js");
@@ -10,7 +11,8 @@ const { requireAuth } = require("../../utils/auth.js");
 
 router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
-router.use("/audio", uploadRouter);
+router.use("/audio", songsRouter);
+router.use("/playlists", playlistsRouter);
 
 router.get(
   "/set-token-cookie",
