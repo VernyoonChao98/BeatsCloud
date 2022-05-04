@@ -23,6 +23,19 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/", async (req, res) => {
+  console.log("hello from bruuuuuuuuuuuuuuuuuuuuu");
+  console.log(req.body);
+  const { playlistId, playlistTitle } = req.body;
+
+  const playlistToEdit = await db.Playlist.findByPk(playlistId);
+
+  const response = await playlistToEdit.update({
+    title: playlistTitle,
+  });
+  return res.json(response);
+});
+
 router.delete("/:id", async (req, res, next) => {
   const playlistId = req.params.id;
 
