@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
 import { addNewSong } from "../../store/uploadFile";
+import Navigation from "../PersonalHome/Navigation";
 
-function UploadButton({ user }) {
+function UploadButton() {
   const dispatch = useDispatch();
-  const hiddenFileInput = React.useRef(null);
+  const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [errors, setErrors] = useState([]);
 
+  if (!sessionUser) return <Redirect to="/" />;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    const userId = user.id;
+    const userId = sessionUser.id;
     const payload = {
       userId,
       fileName,
       file,
     };
-    console.log("hello");
     dispatch(addNewSong(payload)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) {
@@ -28,6 +32,7 @@ function UploadButton({ user }) {
         setErrors([data.message]);
       }
     });
+    history.push("/myHome");
   };
 
   const handleChange = async (e) => {
@@ -36,7 +41,8 @@ function UploadButton({ user }) {
   };
 
   return (
-    <div>
+    <div className="wholeContent">
+      <Navigation user={sessionUser} />
       <form id="audio" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (

@@ -6,6 +6,8 @@ import { loadAllSongs } from "./store/uploadFile";
 
 import Home from "./components/HomePage";
 import PersonalHome from "./components/PersonalHome";
+import UploadPage from "./components/UploadPage";
+import EditPage from "./components/EditPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +27,12 @@ function App() {
           </Route>
           <Route path="/myHome">
             <PersonalHome />
+          </Route>
+          <Route path="/upload">
+            <UploadPage />
+          </Route>
+          <Route path="/songs/:id">
+            <EditPage />
           </Route>
         </Switch>
       </>
