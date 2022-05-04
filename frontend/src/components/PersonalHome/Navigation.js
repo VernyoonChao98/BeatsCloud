@@ -31,8 +31,14 @@ function Navigation({ user }) {
 
   return (
     <div className="navigation">
+      <NavLink exact to="/discover">
+        <p className="navigationText">Discover Logo Eventually</p>
+      </NavLink>
       <NavLink exact to="/myHome">
         <p className="navigationText">Home</p>
+      </NavLink>
+      <NavLink exact to="/playlists">
+        <p className="navigationText">PlayLists/Library</p>
       </NavLink>
       <NavLink exact to="/upload">
         <p className="navigationText">Upload</p>

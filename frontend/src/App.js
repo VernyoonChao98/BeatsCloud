@@ -8,6 +8,8 @@ import Home from "./components/HomePage";
 import PersonalHome from "./components/PersonalHome";
 import UploadPage from "./components/UploadPage";
 import EditPage from "./components/EditPage";
+import DiscoverPage from "./components/DiscoverPage";
+import PlaylistsPage from "./components/PlaylistsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +27,9 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
+          <Route path="/discover">
+            <DiscoverPage />
+          </Route>
           <Route path="/myHome">
             <PersonalHome />
           </Route>
@@ -33,6 +38,9 @@ function App() {
           </Route>
           <Route path="/songs/:id">
             <EditPage />
+          </Route>
+          <Route path="/playlists">
+            <PlaylistsPage />
           </Route>
         </Switch>
       </>

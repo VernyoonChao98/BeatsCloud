@@ -15,7 +15,7 @@ function UploadButton() {
 
   if (!sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
     const userId = sessionUser.id;
@@ -24,15 +24,19 @@ function UploadButton() {
       fileName,
       file,
     };
-    dispatch(addNewSong(payload)).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) {
-        setErrors(data.errors);
-      } else if (data && data.message) {
-        setErrors([data.message]);
+    const createdNewSong = await dispatch(addNewSong(payload)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        } else if (data && data.message) {
+          setErrors([data.message]);
+        }
       }
-    });
-    history.push("/myHome");
+    );
+    if (createdNewSong) {
+      history.push("/myHome");
+    }
   };
 
   const handleChange = async (e) => {

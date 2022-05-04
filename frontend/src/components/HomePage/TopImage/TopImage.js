@@ -5,7 +5,7 @@ import CreateAccountModal from "./CreateAccountModal";
 function TopImage() {
   return (
     <div className="topImageContainer">
-      <div className="logo">logo</div>
+      <div className="logo">Logo Eventually</div>
       <div className="navButtons">
         <LoginFormModal />
         <CreateAccountModal />
