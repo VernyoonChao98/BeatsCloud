@@ -35,7 +35,8 @@ router.post(
     if (req.file) {
       if (
         req.file.mimetype === "video/mp4" ||
-        req.file.mimetype === "video/mp3"
+        req.file.mimetype === "video/mp3" ||
+        req.file.mimetype === "audio/mpeg"
       ) {
         const file = req.file;
         const songUrl = await singlePublicFileUpload(file);
@@ -65,5 +66,33 @@ router.post(
     }
   }
 );
+
+router.put("/Songs", async (req, res) => {
+  const { songId, songTitle } = req.body;
+  const songToEdit = await db.Song.findByPk(songId);
+
+  const response = await songToEdit.update({
+    title: songTitle,
+  });
+  return res.json(response);
+});
+
+router.delete("/Songs/:id", async (req, res) => {
+  const songId = req.params.id;
+
+  const allSongs = await db.SongPlaylist.findAll({
+    where: { songId: songId },
+  });
+
+  allSongs.forEach((song) => {
+    song.destroy();
+  });
+
+  const songToDelete = await db.Song.findByPk(songId);
+
+  await songToDelete.destroy();
+
+  return res.json({ message: "Successfully Deleted." });
+});
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { logout } from "../../store/session";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 function Navigation({ user }) {
   const dispatch = useDispatch();
@@ -30,6 +31,12 @@ function Navigation({ user }) {
 
   return (
     <div className="navigation">
+      <NavLink exact to="/myHome">
+        <p className="navigationText">Home</p>
+      </NavLink>
+      <NavLink exact to="/upload">
+        <p className="navigationText">Upload</p>
+      </NavLink>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
