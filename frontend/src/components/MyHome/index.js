@@ -4,12 +4,12 @@ import { Redirect, NavLink } from "react-router-dom";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
-import { deleteOldSong } from "../../store/uploadFile";
+import { deleteOldSong } from "../../store/audioFile";
 
-import Navigation from "./Navigation";
-import "./PersonalHome.css";
+import Navigation from "../Navigation";
+import "./MyHome.css";
 
-function PersonalHome() {
+function MyHome() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.audioFile);
@@ -32,7 +32,7 @@ function PersonalHome() {
       <div className="allSongs">
         {Object.values(songs).map((singleSong) => {
           return sessionUser.id === singleSong.userId ? (
-            <div key={singleSong.id}>
+            <div key={`${singleSong.id}SongDiv`}>
               <NavLink to={`/songs/${singleSong.id}`}>
                 {singleSong.title}
               </NavLink>
@@ -69,4 +69,4 @@ function PersonalHome() {
   );
 }
 
-export default PersonalHome;
+export default MyHome;

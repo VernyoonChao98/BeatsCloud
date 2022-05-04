@@ -1,8 +1,4 @@
 const express = require("express");
-const asyncHandler = require("express-async-handler");
-const multer = require("multer");
-const { memoryStorage } = require("multer");
-const storage = memoryStorage();
 const db = require("../../db/models");
 
 const { singleMulterUpload, singlePublicFileUpload } = require("../../awsS3");
@@ -80,12 +76,13 @@ router.put("/Songs", async (req, res) => {
 router.delete("/Songs/:id", async (req, res) => {
   const songId = req.params.id;
 
-  const allSongs = await db.SongPlaylist.findAll({
+  // Deletes all association from the join table
+  const allAssociations = await db.SongPlaylist.findAll({
     where: { songId: songId },
   });
 
-  allSongs.forEach((song) => {
-    song.destroy();
+  allAssociations.forEach((songAssociation) => {
+    songAssociation.destroy();
   });
 
   const songToDelete = await db.Song.findByPk(songId);

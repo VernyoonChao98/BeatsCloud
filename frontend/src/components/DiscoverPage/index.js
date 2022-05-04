@@ -4,7 +4,7 @@ import { Redirect, NavLink } from "react-router-dom";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
-import Navigation from "../PersonalHome/Navigation";
+import Navigation from "../Navigation";
 
 function DiscoverPage() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -30,6 +30,7 @@ function DiscoverPage() {
                 {singleSong.title}
               </NavLink>
               <button
+                key={singleSong.id}
                 onClick={(e) => {
                   audiofunction(singleSong);
                 }}

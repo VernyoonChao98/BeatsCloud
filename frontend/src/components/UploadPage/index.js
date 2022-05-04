@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { addNewSong } from "../../store/uploadFile";
-import Navigation from "../PersonalHome/Navigation";
+import { addNewSong } from "../../store/audioFile";
+import Navigation from "../Navigation";
 
 function UploadButton() {
   const dispatch = useDispatch();
