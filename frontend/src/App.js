@@ -19,9 +19,9 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(loadAllSongs());
     dispatch(loadAllPlaylist());
+    dispatch(restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
