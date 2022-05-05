@@ -76,6 +76,8 @@ export const createNewPlaylist = (playlist) => async (dispatch) => {
 
 export const editNewPlaylist = (playlist) => async (dispatch) => {
   playlist = JSON.stringify(playlist);
+
+  console.log(playlist);
   const response = await csrfFetch("/api/playlists", {
     method: "PUT",
     headers: { ContentType: "application/json" },
@@ -103,6 +105,7 @@ const initialState = {};
 
 const playlistReducer = (state = initialState, action) => {
   const newState = { ...state };
+  let Songs = [];
   switch (action.type) {
     case ADD_SONGPLAYLITS:
       newState[action.association.playlistId].Songs.push(action.song);
@@ -113,10 +116,10 @@ const playlistReducer = (state = initialState, action) => {
       );
       return newState;
     case ADD_PLAYLIST:
-      const Songs = [];
       return { ...state, [action.playlist.id]: { ...action.playlist, Songs } };
     case EDIT_PLAYLIST:
-      return { ...state, [action.playlist.id]: { ...action.playlist } };
+      Songs = [...newState[action.playlist.id].Songs];
+      return { ...state, [action.playlist.id]: { ...action.playlist, Songs } };
     case DELETE_PLAYLIST:
       delete newState[action.playlist.id];
       return newState;
