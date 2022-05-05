@@ -39,6 +39,11 @@ function PlaylistsPage() {
             >
               delete
             </button>
+            <div className="songsUnderPlaylist">
+              {singlePlaylist.Songs?.map((song, index) => {
+                return <div key={index}>{song.title}</div>;
+              })}
+            </div>
           </div>
         ) : (
           <></>
