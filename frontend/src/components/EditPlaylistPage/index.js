@@ -3,7 +3,11 @@ import Navigation from "../Navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useParams, useHistory } from "react-router-dom";
-import { editNewPlaylist } from "../../store/playlists";
+import {
+  loadAllPlaylist,
+  deleteSongPlaylistAssociation,
+  editNewPlaylist,
+} from "../../store/playlists";
 
 function EditPlaylistPage() {
   const dispatch = useDispatch();
@@ -14,6 +18,8 @@ function EditPlaylistPage() {
   const playlist = useSelector((state) => state.playlist[playlistId]);
   const [playlistTitle, setPlaylistTitle] = useState(`${playlist.title}`);
 
+  const songs = playlist.Songs;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const editPlaylist = {
@@ -22,6 +28,16 @@ function EditPlaylistPage() {
     };
     await dispatch(editNewPlaylist(editPlaylist));
     history.push("/playlists");
+  };
+
+  const handleRemoveFromPlaylist = async (e, song, playlist) => {
+    e.preventDefault();
+    const payload = {
+      song,
+      playlist,
+    };
+    await dispatch(deleteSongPlaylistAssociation(payload));
+    await dispatch(loadAllPlaylist());
   };
 
   if (!sessionUser) return <Redirect to="/" />;
@@ -44,6 +60,18 @@ function EditPlaylistPage() {
           <button type="submit">Submit</button>
         </label>
       </form>
+      {songs.map((song) => {
+        return (
+          <div key={song.id}>
+            {song.title}
+            <button
+              onClick={(e) => handleRemoveFromPlaylist(e, song, playlist)}
+            >
+              Remove From Playlist
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }

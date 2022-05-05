@@ -1,5 +1,7 @@
 import { csrfFetch } from "./csrf";
 
+import { loadAllPlaylist } from "./playlists";
+
 const LOAD_SONGS = "/api/LOADSONGS";
 const ADD_SONG = "/api/ADDSONG";
 const EDIT_SONG = "/api/EDITSONG";
@@ -80,6 +82,7 @@ export const deleteOldSong = (song) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(deleteSong(song));
+    dispatch(loadAllPlaylist());
   }
 };
 

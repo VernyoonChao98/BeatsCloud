@@ -5,9 +5,9 @@ const ADD_PLAYLIST = "/api/ADDPLAYLIST";
 const EDIT_PLAYLIST = "/api/EDITPLAYLIST";
 const DELETE_PLAYLIST = "/api/DELETEPLAYLIST";
 
-const ADD_SONGPLAYLITS = "/api/ADDSONGPLAYLITS";
+const ADD_SONGPLAYLISTS = "/api/ADDSONGPLAYLISTS";
 
-const lostPlaylists = (playlists) => ({
+const loadPlaylists = (playlists) => ({
   type: LOAD_PLAYLISTS,
   playlists,
 });
@@ -28,10 +28,18 @@ const deletePlaylist = (playlist) => ({
 });
 
 const createSongPlaylist = (association, song) => ({
-  type: ADD_SONGPLAYLITS,
+  type: ADD_SONGPLAYLISTS,
   association,
   song,
 });
+
+export const deleteSongPlaylistAssociation = (payload) => async (dispatch) => {
+  payload = JSON.stringify(payload);
+  const response = await csrfFetch("/api/songplaylists", {
+    method: "DELETE",
+    body: payload,
+  });
+};
 
 export const createSongPlaylistAssociation =
   (association) => async (dispatch) => {
@@ -58,7 +66,7 @@ export const loadAllPlaylist = () => async (dispatch) => {
   });
   if (response.ok) {
     const allPlaylists = await response.json();
-    dispatch(lostPlaylists(allPlaylists));
+    dispatch(loadPlaylists(allPlaylists));
   }
 };
 
@@ -107,7 +115,7 @@ const playlistReducer = (state = initialState, action) => {
   const newState = { ...state };
   let Songs = [];
   switch (action.type) {
-    case ADD_SONGPLAYLITS:
+    case ADD_SONGPLAYLISTS:
       newState[action.association.playlistId].Songs.push(action.song);
       return newState;
     case LOAD_PLAYLISTS:
