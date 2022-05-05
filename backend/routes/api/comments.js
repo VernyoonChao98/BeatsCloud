@@ -10,7 +10,10 @@ router.get("/:id", async (req, res, next) => {
   console.log("hello from back end");
   const songId = req.params.id;
 
-  const allComments = await db.Comment.findAll({ where: { songId } });
+  const allComments = await db.Comment.findAll({
+    include: db.User,
+    where: { songId },
+  });
   if (allComments) {
     return res.json(allComments);
   }
@@ -34,6 +37,20 @@ router.post("/", async (req, res, next) => {
   if (newComment) {
     const returnNewComment = await newComment.save();
     return res.json(returnNewComment);
+  }
+});
+
+router.delete("/:id", async (req, res, next) => {
+  console.log("hello from backend");
+  let commentId = req.params.id;
+  commentId = parseInt(commentId);
+  console.log(commentId);
+
+  const oldComment = await db.Comment.findByPk(commentId);
+
+  if (oldComment) {
+    await oldComment.destroy();
+    return res.json({ message: "Successfully Deleted." });
   }
 });
 

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import { editNewSong } from "../../store/audioFile";
-import { createComment, loadAllComments } from "../../store/comment";
+import {
+  createComment,
+  loadAllComments,
+  deleteComment,
+} from "../../store/comment";
 
 function EditSongPage() {
   const dispatch = useDispatch();
@@ -15,11 +19,11 @@ function EditSongPage() {
   const [songTitle, setSongTitle] = useState(`${song.title}`);
   const [comment, setComment] = useState("");
 
-  console.log(comments);
-
   useEffect(() => {
     dispatch(loadAllComments(song));
   }, [dispatch]);
+
+  if (!sessionUser) return <Redirect to="/" />;
 
   const handleSongSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +43,16 @@ function EditSongPage() {
       song,
     };
     await dispatch(createComment(payload));
+    setComment("");
+  };
+
+  const handleDeleteComment = async (e, comment) => {
+    e.preventDefault();
+    console.log(comment);
+    const payload = {
+      comment,
+    };
+    await dispatch(deleteComment(payload));
   };
 
   return (
@@ -62,19 +76,30 @@ function EditSongPage() {
       {Object.values(comments).map((comment) => {
         return sessionUser.id === comment.userId ? (
           <div key={comment.id}>
-            {comment.context}
-            <button>delete</button>
+            <div>{sessionUser.username}</div>
+            <p>{comment.context}</p>
+            <button
+              onClick={(e) => {
+                handleDeleteComment(e, comment);
+              }}
+            >
+              delete
+            </button>
             <button>edit</button>
           </div>
         ) : (
-          <div key={comment.id}>{comment.context}</div>
+          <div key={comment.id}>
+            <div>User: {comment.User.username}</div>
+            <p>{comment.context}</p>
+            {comment.context}
+          </div>
         );
       })}
       <form onSubmit={handleCommentSubmit}>
         <label>
           Comment
           <input
-            type="textarea"
+            type="text"
             name="title"
             required
             value={comment}
