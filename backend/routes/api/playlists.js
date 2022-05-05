@@ -33,7 +33,7 @@ router.post("/", validatePlaylist, async (req, res, next) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put("/", validatePlaylist, async (req, res) => {
   const { playlistId, playlistTitle } = req.body;
 
   const playlistToEdit = await db.Playlist.findByPk(playlistId);
