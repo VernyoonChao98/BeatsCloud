@@ -33,10 +33,14 @@ function MyHome() {
         {Object.values(songs).map((singleSong) => {
           return sessionUser.id === singleSong.userId ? (
             <div key={`${singleSong.id}SongDiv`}>
-              <NavLink to={`/songs/${singleSong.id}`}>
+              <NavLink
+                key={`${singleSong.id}SongNav`}
+                to={`/songs/${singleSong.id}`}
+              >
                 {singleSong.title}
               </NavLink>
               <button
+                key={`${singleSong.id}SongPlay`}
                 onClick={(e) => {
                   audiofunction(singleSong);
                 }}
@@ -44,6 +48,7 @@ function MyHome() {
                 Play Song
               </button>
               <button
+                key={`${singleSong.id}SongDelete`}
                 onClick={(e) => {
                   handleDelete(singleSong);
                 }}
@@ -52,7 +57,7 @@ function MyHome() {
               </button>
             </div>
           ) : (
-            <></>
+            <div key={`${singleSong.id}SongDiv`}></div>
           );
         })}
       </div>

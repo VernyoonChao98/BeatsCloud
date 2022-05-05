@@ -7,7 +7,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 router.get("/", async (req, res, next) => {
-  const allPlaylists = await db.Playlist.findAll();
+  const allPlaylists = await db.Playlist.findAll({ include: db.Song });
   return res.json(allPlaylists);
 });
 
@@ -24,8 +24,6 @@ router.post("/", async (req, res, next) => {
 });
 
 router.put("/", async (req, res) => {
-  console.log("hello from bruuuuuuuuuuuuuuuuuuuuu");
-  console.log(req.body);
   const { playlistId, playlistTitle } = req.body;
 
   const playlistToEdit = await db.Playlist.findByPk(playlistId);

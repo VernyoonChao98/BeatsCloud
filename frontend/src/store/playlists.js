@@ -5,6 +5,8 @@ const ADD_PLAYLIST = "/api/ADDPLAYLIST";
 const EDIT_PLAYLIST = "/api/EDITPLAYLIST";
 const DELETE_PLAYLIST = "/api/DELETEPLAYLIST";
 
+const ADD_SONGPLAYLITS = "/api/ADDSONGPLAYLITS";
+
 const lostPlaylists = (playlists) => ({
   type: LOAD_PLAYLISTS,
   playlists,
@@ -24,6 +26,31 @@ const deletePlaylist = (playlist) => ({
   type: DELETE_PLAYLIST,
   playlist,
 });
+
+const createSongPlaylist = (association, song) => ({
+  type: ADD_SONGPLAYLITS,
+  association,
+  song,
+});
+
+export const createSongPlaylistAssociation =
+  (association) => async (dispatch) => {
+    const song = association.song;
+    association = JSON.stringify(association);
+    const response = await csrfFetch("/api/songplaylists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: association,
+    });
+
+    if (response.ok) {
+      const newAssociation = await response.json();
+      console.log(newAssociation);
+      dispatch(createSongPlaylist(newAssociation, song));
+    }
+  };
 
 export const loadAllPlaylist = () => async (dispatch) => {
   const response = await csrfFetch("/api/playlists", {
@@ -48,8 +75,9 @@ export const createNewPlaylist = (playlist) => async (dispatch) => {
 };
 
 export const editNewPlaylist = (playlist) => async (dispatch) => {
-  console.log("hello brotherrrrr");
   playlist = JSON.stringify(playlist);
+
+  console.log(playlist);
   const response = await csrfFetch("/api/playlists", {
     method: "PUT",
     headers: { ContentType: "application/json" },
@@ -77,17 +105,21 @@ const initialState = {};
 
 const playlistReducer = (state = initialState, action) => {
   const newState = { ...state };
-  console.log("wassup from reducer");
+  let Songs = [];
   switch (action.type) {
+    case ADD_SONGPLAYLITS:
+      newState[action.association.playlistId].Songs.push(action.song);
+      return newState;
     case LOAD_PLAYLISTS:
       action.playlists.forEach(
         (playlist) => (newState[playlist.id] = playlist)
       );
       return newState;
     case ADD_PLAYLIST:
-      return { ...state, [action.playlist.id]: { ...action.playlist } };
+      return { ...state, [action.playlist.id]: { ...action.playlist, Songs } };
     case EDIT_PLAYLIST:
-      return { ...state, [action.playlist.id]: { ...action.playlist } };
+      Songs = [...newState[action.playlist.id].Songs];
+      return { ...state, [action.playlist.id]: { ...action.playlist, Songs } };
     case DELETE_PLAYLIST:
       delete newState[action.playlist.id];
       return newState;

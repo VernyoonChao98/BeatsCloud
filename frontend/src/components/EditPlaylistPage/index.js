@@ -16,7 +16,6 @@ function EditPlaylistPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("hellooooooo");
     const editPlaylist = {
       playlistId,
       playlistTitle,
