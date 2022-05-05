@@ -24,4 +24,17 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.delete("/", async (req, res, next) => {
+  const { song, playlist } = req.body;
+  const playlistId = playlist.id;
+  const songId = song.id;
+  const oldAssociation = await db.SongPlaylist.findOne({
+    where: { playlistId, songId },
+  });
+
+  await oldAssociation.destroy();
+
+  return res.json(oldAssociation);
+});
+
 module.exports = router;
