@@ -41,7 +41,7 @@ function DiscoverPage() {
   };
 
   return (
-    <div className="wholeContent">
+    <div id="topBorder" className="wholeContent">
       <Navigation user={sessionUser} />
       <div className="allSongs">
         {Object.values(songs).map((singleSong) => {
@@ -93,6 +93,7 @@ function DiscoverPage() {
           onPlay={(e) => console.log("Playing")}
           ref={player}
           volume={0.1}
+          layout="horizontal-reverse"
         />
       </footer>
     </div>
