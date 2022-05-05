@@ -4,18 +4,23 @@ const db = require("../../db/models");
 const router = express.Router();
 
 router.post("/", async (req, res, next) => {
-  console.log("hello");
-  console.log(req.body);
-  const { playlistId, songId } = req.body;
+  const { playlistId, song } = req.body;
+  const songId = song.id;
 
   const newAssociation = await db.SongPlaylist.build({
     playlistId,
     songId,
   });
 
-  if (newAssociation) {
-    await newAssociation.save();
-    return res.json(newAssociation);
+  const oldAssociation = await db.SongPlaylist.findOne({
+    where: { playlistId, songId },
+  });
+
+  if (!oldAssociation) {
+    if (newAssociation) {
+      await newAssociation.save();
+      return res.json(newAssociation);
+    }
   }
 });
 

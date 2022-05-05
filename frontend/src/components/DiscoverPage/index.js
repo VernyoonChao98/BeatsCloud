@@ -6,7 +6,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
 import Navigation from "../Navigation";
-import { createSongPlaylistAssociation } from "../../store/songplaylist";
+import { createSongPlaylistAssociation } from "../../store/playlists";
 
 function DiscoverPage() {
   const dispatch = useDispatch();
@@ -25,11 +25,11 @@ function DiscoverPage() {
     player.current.audio.current.play(song);
   };
 
-  const handleAddToPlaylist = (e, songId) => {
+  const handleAddToPlaylist = (e, singleSong) => {
     e.preventDefault();
     const payload = {
       playlistId: parseInt(selectedPlaylist),
-      songId,
+      song: singleSong,
     };
     if (selectedPlaylist) {
       dispatch(createSongPlaylistAssociation(payload));
@@ -78,7 +78,7 @@ function DiscoverPage() {
                       );
                     })}
                 </select>
-                <button onClick={(e) => handleAddToPlaylist(e, singleSong.id)}>
+                <button onClick={(e) => handleAddToPlaylist(e, singleSong)}>
                   Add to Playlist
                 </button>
               </form>

@@ -32,7 +32,6 @@ export const loadAllSongs = () => async (dispatch) => {
 
   if (response.ok) {
     const songs = await response.json();
-    console.log(songs, "HElllo");
     dispatch(loadSongs(songs));
     return songs;
   }
