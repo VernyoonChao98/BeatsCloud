@@ -6,12 +6,32 @@ const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
+const validatePlaylist = [
+  check("title")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 3, max: 50 })
+    .withMessage(
+      "Please provide a title with at least 3 or less than 51 characters."
+    ),
+  handleValidationErrors,
+];
+
+const validateEditPlaylist = [
+  check("playlistTitle")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 3, max: 50 })
+    .withMessage(
+      "Please provide a title with at least 3 or less than 51 characters."
+    ),
+  handleValidationErrors,
+];
+
 router.get("/", async (req, res, next) => {
   const allPlaylists = await db.Playlist.findAll({ include: db.Song });
   return res.json(allPlaylists);
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", validatePlaylist, async (req, res, next) => {
   const { userId, title } = req.body;
   const newPlaylist = await db.Playlist.build({
     userId,
@@ -23,15 +43,17 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put("/", validateEditPlaylist, async (req, res) => {
   const { playlistId, playlistTitle } = req.body;
 
   const playlistToEdit = await db.Playlist.findByPk(playlistId);
 
-  const response = await playlistToEdit.update({
+  const newPlaylist = await playlistToEdit.update({
     title: playlistTitle,
   });
-  return res.json(response);
+  if (newPlaylist) {
+    return res.json(newPlaylist);
+  }
 });
 
 router.delete("/:id", async (req, res, next) => {
