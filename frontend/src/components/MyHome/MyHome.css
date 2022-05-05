@@ -1,15 +1,21 @@
 .navigation {
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 46px;
   font-family: Interstate, Lucida Grande, Arial, sans-serif;
   font-weight: 100;
   font-size: 14px;
   line-height: 1.5;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 1);
   color: white;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+#topBorder {
+  border: 0;
 }
 
 .navigationText {
@@ -28,7 +34,7 @@
 #footer {
   position: sticky;
   bottom: 0;
-  padding-bottom: 32px;
+  padding-bottom: 5px;
   width: 100%;
   height: 3.5rem;
 }

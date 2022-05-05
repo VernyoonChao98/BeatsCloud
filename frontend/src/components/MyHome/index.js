@@ -68,6 +68,7 @@ function MyHome() {
           onPlay={(e) => console.log("Playing")}
           ref={player}
           volume={0.1}
+          layout="horizontal-reverse"
         />
       </footer>
     </div>
