@@ -25,21 +25,36 @@ function PlaylistsPage({ audioFunctionPlaylist }) {
   return (
     <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
-      PlaylistsPage
+      <div className="playlistInfoDiv">
+        Your Playlists:
+        {
+          Object.values(playlists).filter(
+            (playlist) => sessionUser.id === playlist.userId
+          ).length
+        }
+        <button
+          className="createPlaylistButton"
+          onClick={handleRouteCreatePlaylist}
+        >
+          Create a new Playlist
+        </button>
+      </div>
       {Object.values(playlists).map((singlePlaylist) => {
         return sessionUser.id === singlePlaylist.userId ? (
-          <div key={singlePlaylist.id}>
-            <NavLink to={`/playlists/${singlePlaylist.id}`}>
-              {singlePlaylist.title}
-            </NavLink>
-            <button
-              onClick={(e) => {
-                handleDelete(e, singlePlaylist);
-              }}
+          <div className="playlistContainer" key={singlePlaylist.id}>
+            <NavLink
+              className="playlistName"
+              to={`/playlists/${singlePlaylist.id}`}
             >
-              delete
-            </button>
+              <p>{singlePlaylist.title}</p>
+              <p>Songs: {singlePlaylist.Songs.length}</p>
+            </NavLink>
             <div className="songsUnderPlaylist">
+              {singlePlaylist.Songs?.map((song, index) => {
+                return <div key={index}>{song.title}</div>;
+              })}
+            </div>
+            <div>
               <button
                 onClick={(e) => {
                   audioFunctionPlaylist(singlePlaylist);
@@ -47,16 +62,19 @@ function PlaylistsPage({ audioFunctionPlaylist }) {
               >
                 Play Playlist
               </button>
-              {singlePlaylist.Songs?.map((song, index) => {
-                return <div key={index}>{song.title}</div>;
-              })}
+              <button
+                onClick={(e) => {
+                  handleDelete(e, singlePlaylist);
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         ) : (
           <></>
         );
       })}
-      <button onClick={handleRouteCreatePlaylist}>Create a new Playlist</button>
     </div>
   );
 }

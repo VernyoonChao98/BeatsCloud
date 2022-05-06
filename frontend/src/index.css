@@ -286,10 +286,15 @@ body {
   background-color: rgba(46, 45, 45, 0.5);
 }
 
+.playlistInfoDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
 .addToPlaylistForm {
   display: flex;
   flex-direction: column;
-  height: 30px;
+  margin: 24px;
 }
 
 #addToPlaylistButton {
@@ -304,6 +309,65 @@ body {
 
 .options {
   background-color: #f2f2f2;
+}
+
+/* myHome Page ------------------------------------------------- */
+
+.allSongsMyPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.allIndividualSongs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+  padding: 3px;
+}
+
+/* playlistpage ------------------------------------- */
+
+.playlistContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.playlistName {
+  text-decoration: none;
+  margin: 0px;
+  inline-size: 300px;
+  overflow-wrap: break-word;
+  text-align: center;
+  word-wrap: wrap;
+  color: black;
+  width: fit-content;
+  height: fit-content;
+  width: 300px;
+}
+
+.playlistName:hover {
+  color: red;
+  background-color: white;
+  border: 1px solid #333;
+  border-radius: 50px;
+}
+
+.playlistName > p {
+  margin: 10px 10px;
+}
+
+.createPlaylistButton {
+  width: 200px;
+}
+
+.songsUnderPlaylist {
+  width: 300px;
+  inline-size: 300px;
+  margin: 0px;
+  overflow-wrap: break-word;
 }
 
 #audio {

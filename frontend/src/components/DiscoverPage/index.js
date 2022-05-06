@@ -44,6 +44,15 @@ function DiscoverPage({ audioFunction }) {
               >
                 <p>{singleSong.title}</p>
               </NavLink>
+              <button
+                className="playSong"
+                key={singleSong.id}
+                onClick={(e) => {
+                  audioFunction(singleSong);
+                }}
+              >
+                Play
+              </button>
               <form className="addToPlaylistForm">
                 <button
                   className="button"
@@ -80,15 +89,6 @@ function DiscoverPage({ audioFunction }) {
                     })}
                 </select>
               </form>
-              <button
-                className="playSong"
-                key={singleSong.id}
-                onClick={(e) => {
-                  audioFunction(singleSong);
-                }}
-              >
-                Play
-              </button>
             </div>
           );
         })}

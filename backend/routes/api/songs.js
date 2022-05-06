@@ -27,7 +27,9 @@ const validateEditSong = [
 ];
 
 router.get("/Songs", async (req, res) => {
-  const songs = await db.Song.findAll({ include: db.User });
+  const songs = await db.Song.findAll({
+    include: [{ model: db.User }, { model: db.Comment }],
+  });
   return res.json(songs);
 });
 

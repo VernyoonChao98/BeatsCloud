@@ -10,7 +10,7 @@ function Trending({ audioFunction, audioFunctionPlaylist }) {
 
   useEffect(() => {
     dispatch(loadAllSongs()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  }, [dispatch, isLoaded]);
 
   const trendingSongs = [];
   for (let i = 0; i < 12; i++) {
@@ -30,12 +30,12 @@ function Trending({ audioFunction, audioFunctionPlaylist }) {
           Hear what’s trending in the Beatscloud community
         </p>
         <div className="allTrendingSongsContainer">
-          {trendingSongs.map((song) => {
+          {trendingSongs?.map((song) => {
             return (
-              <div key={`${song.id}TrendingSong`} className="trendingSongs">
-                {song.title}
+              <div key={`${song?.id}TrendingSong`} className="trendingSongs">
+                {song?.title}
                 <button
-                  key={song.id}
+                  key={song?.id}
                   onClick={(e) => {
                     audioFunction(song);
                   }}
