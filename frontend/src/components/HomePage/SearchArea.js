@@ -4,11 +4,16 @@ function SearchArea() {
   return (
     <div className="searchContainer">
       <label className="search">
-        Search
-        <input name="Search" id="searchHome" placeholder="Search"></input>
+        <input
+          name="Search"
+          id="searchHome"
+          placeholder="Search for artists, bands, tracks, podcasts"
+        ></input>
       </label>
       or
-      <button className="button" id="uploadYourOwn">Upload your own</button>
+      <button className="button" id="uploadYourOwn">
+        Upload your own
+      </button>
     </div>
   );
 }

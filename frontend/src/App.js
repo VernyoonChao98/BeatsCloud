@@ -41,10 +41,15 @@ function App() {
   const audioFunction = async (singleSong) => {
     setCurrentSongName(singleSong.title);
     await setSong(`${singleSong.songUrl}`);
+    setPlaylist([]);
     player.current.audio.current.play(song);
   };
 
   const audioFunctionPlaylist = (singlePlaylist) => {
+    if (singlePlaylist.Songs.length === 0) {
+      setCurrentSongName("No songs in Playlist");
+      return;
+    }
     const playlistSongNames = singlePlaylist.Songs.map(
       (SongObj) => SongObj.title
     );
@@ -63,6 +68,9 @@ function App() {
   };
 
   const handleClickPrev = (e) => {
+    if (playlist.length === 0) {
+      return;
+    }
     const changeValue = currentIndex - 1;
     setCurrentIndex(changeValue);
     if (!playlist[changeValue]) {
@@ -79,6 +87,9 @@ function App() {
   };
 
   const handleClickNext = (e) => {
+    if (playlist.length === 0) {
+      return;
+    }
     const changeValue = currentIndex + 1;
     setCurrentIndex(changeValue);
     if (!playlist[changeValue]) {
