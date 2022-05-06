@@ -25,7 +25,7 @@ function EditSongPage() {
     dispatch(loadAllComments(song)).then(() => {
       setIsLoaded(true);
     });
-  }, [dispatch, song]);
+  }, [dispatch, song, isLoaded]);
 
   if (!sessionUser) return <Redirect to="/" />;
 

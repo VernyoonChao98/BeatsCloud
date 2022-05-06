@@ -14,6 +14,9 @@ function MyHome({ audioFunction }) {
   const myPlaylists = useSelector((state) => state.playlist);
   const [selectedPlaylist, setSelectedPlaylist] = useState();
 
+  
+
+
   if (!sessionUser) return <Redirect to="/" />;
 
   const handleDelete = (singleSong) => {

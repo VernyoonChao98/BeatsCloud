@@ -1,5 +1,7 @@
 import { csrfFetch } from "./csrf";
 
+import { loadAllSongs } from "./audioFile";
+
 const LOAD_COMMENTS = "/api/LOADCOMMENTS";
 const ADD_COMMENT = "/api/ADDCOMMENT";
 const DELETE_COMMENT = "/api/DELETECOMMENT";
@@ -41,6 +43,7 @@ export const createComment = (payload) => async (dispatch) => {
   if (response.ok) {
     const newComment = await response.json();
     dispatch(addComment(newComment));
+    dispatch(loadAllSongs());
   }
 };
 
@@ -55,6 +58,7 @@ export const deleteComment = (payload) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(removeComment(payload.comment));
+    dispatch(loadAllSongs());
   }
 };
 
