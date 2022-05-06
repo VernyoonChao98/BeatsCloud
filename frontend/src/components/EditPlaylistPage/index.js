@@ -17,6 +17,7 @@ function EditPlaylistPage() {
   const playlistId = useParams().id;
   const playlist = useSelector((state) => state.playlist[playlistId]);
   const [playlistTitle, setPlaylistTitle] = useState(`${playlist.title}`);
+  const [errors, setErrors] = useState([]);
 
   const songs = playlist.Songs;
 
@@ -26,8 +27,20 @@ function EditPlaylistPage() {
       playlistId,
       playlistTitle,
     };
-    await dispatch(editNewPlaylist(editPlaylist));
-    history.push("/playlists");
+    const newEditPlaylist = await dispatch(editNewPlaylist(editPlaylist)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        } else if (data && data.message) {
+          setErrors([data.message]);
+        }
+      }
+    );
+
+    if (newEditPlaylist) {
+      history.push("/playlists");
+    }
   };
 
   const handleRemoveFromPlaylist = async (e, song, playlist) => {
@@ -47,6 +60,11 @@ function EditPlaylistPage() {
       <Navigation user={sessionUser} />
       Playlist Edit Form
       <form onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
         <label>
           Title
           <input

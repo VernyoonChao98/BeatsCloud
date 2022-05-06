@@ -53,20 +53,24 @@ function EditSongPage() {
       <div id="noTopBorder" className="wholeContent">
         <Navigation user={sessionUser} />
         <p>{song.title}</p>
-        <div>
-          <button
-            className="button"
-            id="createAccountButton"
-            onClick={() => setShowModal(true)}
-          >
-            Edit Song
-          </button>
-          {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-              <EditSongForm setShowModal={setShowModal} />
-            </Modal>
-          )}
-        </div>
+        {sessionUser.id === song.userId ? (
+          <div>
+            <button
+              className="button"
+              id="createAccountButton"
+              onClick={() => setShowModal(true)}
+            >
+              Edit Song
+            </button>
+            {showModal && (
+              <Modal onClose={() => setShowModal(false)}>
+                <EditSongForm setShowModal={setShowModal} />
+              </Modal>
+            )}
+          </div>
+        ) : (
+          <div></div>
+        )}
         <p>Comments</p>
         {Object.values(comments).map((comment) => {
           return sessionUser.id === comment.userId ? (
@@ -85,7 +89,6 @@ function EditSongPage() {
             <div key={comment.id}>
               <div>User: {comment.User.username}</div>
               <p>{comment.context}</p>
-              {comment.context}
             </div>
           );
         })}
