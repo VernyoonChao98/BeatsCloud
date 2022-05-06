@@ -4,7 +4,6 @@ import SearchArea from "./SearchArea";
 import Trending from "./Trending";
 import MobileImage from "./MobileImage";
 import AltSignUp from "./AltSignUp";
-import Footer from "./Footer";
 
 function Home({ audioFunction }) {
   return (
