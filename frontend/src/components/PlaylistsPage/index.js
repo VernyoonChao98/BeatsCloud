@@ -5,7 +5,7 @@ import { deleteOldPlaylist } from "../../store/playlists";
 
 import Navigation from "../Navigation";
 
-function PlaylistsPage() {
+function PlaylistsPage({ audioFunctionPlaylist }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -40,6 +40,13 @@ function PlaylistsPage() {
               delete
             </button>
             <div className="songsUnderPlaylist">
+              <button
+                onClick={(e) => {
+                  audioFunctionPlaylist(singlePlaylist);
+                }}
+              >
+                Play Playlist
+              </button>
               {singlePlaylist.Songs?.map((song, index) => {
                 return <div key={index}>{song.title}</div>;
               })}

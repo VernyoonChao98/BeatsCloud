@@ -83,7 +83,6 @@ function EditSongPage() {
               >
                 delete
               </button>
-              <button>edit</button>
             </div>
           ) : (
             <div key={comment.id}>

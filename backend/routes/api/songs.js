@@ -13,8 +13,16 @@ const { handleValidationErrors } = require("../../utils/validation");
 const validateSong = [
   check("fileName")
     .exists({ checkFalsy: true })
-    .isLength({ min: 3 })
-    .withMessage("Please provide a title with at least 3 characters."),
+    .isLength({ max: 50 })
+    .withMessage("Too long of a Song Title"),
+  handleValidationErrors,
+];
+
+const validateEditSong = [
+  check("title")
+    .exists({ checkFalsy: true })
+    .isLength({ max: 50 })
+    .withMessage("Too long of a Song Title"),
   handleValidationErrors,
 ];
 
@@ -34,6 +42,7 @@ router.post(
         req.file.mimetype === "video/mp3" ||
         req.file.mimetype === "audio/mpeg"
       ) {
+        console.log(req.body);
         const file = req.file;
         const songUrl = await singlePublicFileUpload(file);
         const songTitle = req.body.fileName;
@@ -63,7 +72,7 @@ router.post(
   }
 );
 
-router.put("/Songs", async (req, res) => {
+router.put("/Songs", validateEditSong, async (req, res) => {
   const { songId, songTitle } = req.body;
   const songToEdit = await db.Song.findByPk(songId);
 
