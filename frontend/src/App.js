@@ -17,6 +17,8 @@ import PlaylistsPage from "./components/PlaylistsPage";
 import CreatePlaylistPage from "./components/PlaylistsPage/CreatePlaylistsPage";
 import EditPlaylistPage from "./components/EditPlaylistPage";
 
+import "./index.css";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -95,7 +97,7 @@ function App() {
       <>
         <Switch>
           <Route path="/" exact>
-            <Home />
+            <Home audioFunction={audioFunction} />
           </Route>
           <Route path="/discover">
             <DiscoverPage audioFunction={audioFunction} />

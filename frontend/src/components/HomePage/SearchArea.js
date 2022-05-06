@@ -2,16 +2,13 @@ import React from "react";
 
 function SearchArea() {
   return (
-    <div className="searchArea">
+    <div className="searchContainer">
       <label className="search">
         Search
-        <textarea name="Search" placeholder="Search"></textarea>
+        <input name="Search" id="searchHome" placeholder="Search"></input>
       </label>
       or
-      <button className="button">Upload your own</button>
-      <div>
-        <button className="button">Explore trending playlists</button>
-      </div>
+      <button className="button" id="uploadYourOwn">Upload your own</button>
     </div>
   );
 }

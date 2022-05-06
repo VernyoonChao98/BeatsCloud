@@ -1,14 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 
-import AudioPlayer from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
-
 import Navigation from "../Navigation";
 import { createSongPlaylistAssociation } from "../../store/playlists";
+import "./DiscoverPage.css";
 
-function DiscoverPage({ song, setIsLoaded, audioFunction, player }) {
+function DiscoverPage({ audioFunction }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.audioFile);

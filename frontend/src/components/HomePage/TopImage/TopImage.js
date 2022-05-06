@@ -10,7 +10,7 @@ function TopImage() {
         <LoginFormModal />
         <CreateAccountModal />
       </div>
-      <div className="text">
+      <div className="topImageText">
         <h2>Discover more with BeatsCloud Go+</h2>
         <p>
           BeatsCloud Go+ lets you listen offline, ad-free, with over 150 million

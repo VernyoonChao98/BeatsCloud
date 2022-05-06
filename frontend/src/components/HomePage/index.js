@@ -1,29 +1,19 @@
 import React from "react";
 import TopImage from "./TopImage/TopImage";
 import SearchArea from "./SearchArea";
+import Trending from "./Trending";
 import MobileImage from "./MobileImage";
-import SoundCloudTeaser from "./SoundCloudTeaser";
 import AltSignUp from "./AltSignUp";
 import Footer from "./Footer";
 
-function Home() {
+function Home({ audioFunction }) {
   return (
     <div className="wholeContent">
       <TopImage />
       <SearchArea />
+      <Trending audioFunction={audioFunction} />
       <MobileImage />
-      <SoundCloudTeaser />
       <AltSignUp />
-      <Footer />
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
-      <p>asdasdasda</p>
     </div>
   );
 }

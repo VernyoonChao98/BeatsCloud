@@ -1,6 +1,6 @@
 /* TODO Add site wide styles */
 html {
-  background-color: rgba(51, 51, 51, 0.068);
+  background-color: #f2f2f2;
 }
 
 body {
@@ -18,10 +18,10 @@ body {
   display: flex;
   flex-direction: column;
   background-color: white;
-  color: blue;
+  color: black;
   border-top: 4px solid rgba(255, 85, 0, 1);
   width: 1240px;
-  margin-bottom: 66px;
+  margin-bottom: 58px;
 }
 
 .button {
@@ -34,6 +34,15 @@ body {
 .button:hover {
   cursor: pointer;
 }
+/*  HomePage ---------------------------------    */
+
+.logo {
+  position: absolute;
+  background-image: url("./images/BeatsCloud.png");
+  transform: translate(-550px, -190px);
+}
+
+/*  LogoTopImage ---------------------------------    */
 
 .topImageContainer {
   display: flex;
@@ -45,12 +54,6 @@ body {
   height: 450px;
   justify-content: center;
   align-items: center;
-}
-
-.logo {
-  position: absolute;
-  background-image: url("./images/BeatsCloud.png");
-  transform: translate(-550px, -190px);
 }
 
 .navButtons {
@@ -67,11 +70,17 @@ body {
   border-color: #ccc;
 }
 
+#uploadYourOwn {
+  margin-left: 14px;
+  padding: 13px 23px;
+  height: 46px;
+}
+
 #createAccountButton {
   padding: 4px 20px;
 }
 
-.text {
+.topImageText {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -80,31 +89,122 @@ body {
   color: white;
 }
 
-.text > h2 {
+.topImageText > h2 {
   margin-bottom: 8px;
   font-size: 36px;
   font-weight: 100;
 }
 
-.text > p {
+.topImageText > p {
   margin-bottom: 8px;
   font-size: 18px;
   max-width: 550px;
   text-align: center;
 }
 
-.search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/*  SearchContainer ---------------------------------    */
 
-.searchArea {
+.searchContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   color: #333;
+  font-size: 16px;
+  margin: 49px 0 12px;
 }
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  margin-right: 14px;
+}
+
+#searchHome {
+  background-color: #f2f2f2;
+  width: 600px;
+  padding: 0 16px;
+  height: 46px;
+}
+
+/*  TrendingContainer ---------------------------------    */
+
+.trendingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 620px;
+}
+
+.trendingText {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.trendingSongs {
+  width: 180px;
+  height: 180px;
+}
+
+.allTrendingSongsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 450px;
+}
+
+#trendingButton {
+  font-size: 18px;
+  height: 46px;
+}
+
+/*  MobileContainer ---------------------------------    */
+
+.mobileContainer {
+  background-color: #f2f2f2;
+  height: 450px;
+}
+
+.mobileImage {
+  background-image: url(https://a-v2.sndcdn.com/assets/images/never_stop_listening@1x-9c5264ff.jpg);
+  background-size: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  width: 800px;
+  height: 450px;
+}
+
+.altSignUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 375px;
+}
+
+/*  MobileContainer ---------------------------------    */
+
+#thankYou {
+  font-size: 36px;
+  display: block;
+  margin: 0px;
+}
+
+#saveTracks {
+  font-size: 24px;
+  margin: 7px 0px 0px 0px;
+}
+
+.myLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*  Navigation ---------------------------------    */
 
 .navigation {
   position: sticky;
@@ -144,18 +244,6 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-}
-
-.rhap_header {
-  display: absolute;
-  color: black;
-  margin-bottom: 0px;
-  transform: translate(20px, 4px);
-}
-
-.rhap_container {
-  border: 1px solid black;
-  padding: 0px;
 }
 
 #createAccountForm {
