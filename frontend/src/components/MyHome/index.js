@@ -1,13 +1,10 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
-import AudioPlayer from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
 
 import { deleteOldSong } from "../../store/audioFile";
 
 import Navigation from "../Navigation";
-import "./MyHome.css";
 
 function MyHome({ audioFunction }) {
   const dispatch = useDispatch();

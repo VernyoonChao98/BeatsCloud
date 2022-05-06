@@ -30,9 +30,9 @@ function App() {
   const [currentPlaylistSongNames, setCurrentPlaylistSongNames] = useState([]);
   const player = useRef();
 
-  useEffect(async () => {
-    await dispatch(loadAllSongs());
-    await dispatch(loadAllPlaylist());
+  useEffect(() => {
+    dispatch(loadAllSongs());
+    dispatch(loadAllPlaylist());
     dispatch(restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
