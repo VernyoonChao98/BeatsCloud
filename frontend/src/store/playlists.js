@@ -35,7 +35,7 @@ const createSongPlaylist = (association, song) => ({
 
 export const deleteSongPlaylistAssociation = (payload) => async (dispatch) => {
   payload = JSON.stringify(payload);
-  const response = await csrfFetch("/api/songplaylists", {
+  await csrfFetch("/api/songplaylists", {
     method: "DELETE",
     body: payload,
   });
@@ -55,7 +55,6 @@ export const createSongPlaylistAssociation =
 
     if (response.ok) {
       const newAssociation = await response.json();
-      console.log(newAssociation);
       dispatch(createSongPlaylist(newAssociation, song));
     }
   };
@@ -79,13 +78,13 @@ export const createNewPlaylist = (playlist) => async (dispatch) => {
   if (response.ok) {
     const newPlaylist = await response.json();
     dispatch(addPlaylist(newPlaylist));
+    return true;
   }
 };
 
 export const editNewPlaylist = (playlist) => async (dispatch) => {
   playlist = JSON.stringify(playlist);
 
-  console.log(playlist);
   const response = await csrfFetch("/api/playlists", {
     method: "PUT",
     headers: { ContentType: "application/json" },
@@ -94,8 +93,8 @@ export const editNewPlaylist = (playlist) => async (dispatch) => {
 
   if (response.ok) {
     const newPlaylistEdit = await response.json();
-    console.log(newPlaylistEdit);
     dispatch(editPlaylist(newPlaylistEdit));
+    return true;
   }
 };
 

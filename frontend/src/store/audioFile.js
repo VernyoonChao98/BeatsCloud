@@ -56,6 +56,7 @@ export const addNewSong = (audioFile) => async (dispatch) => {
   if (response.ok) {
     const newSong = await response.json();
     dispatch(addSong(newSong));
+    dispatch(loadAllSongs());
     return true;
   }
 };
@@ -72,6 +73,7 @@ export const editNewSong = (songEdit) => async (dispatch) => {
   if (response.ok) {
     const newSongEdit = await response.json();
     dispatch(editSong(newSongEdit));
+    return true;
   }
 };
 

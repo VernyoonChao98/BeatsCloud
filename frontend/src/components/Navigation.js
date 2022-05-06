@@ -38,7 +38,7 @@ function Navigation({ user }) {
         <p className="navigationText">Home</p>
       </NavLink>
       <NavLink exact to="/playlists">
-        <p className="navigationText">PlayLists/Library</p>
+        <p className="navigationText">Library</p>
       </NavLink>
       <NavLink exact to="/upload">
         <p className="navigationText">Upload</p>

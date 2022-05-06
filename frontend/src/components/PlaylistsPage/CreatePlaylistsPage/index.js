@@ -11,6 +11,7 @@ function CreatePlaylistPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
+  const [errors, setErrors] = useState([]);
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -23,9 +24,20 @@ function CreatePlaylistPage() {
       title,
     };
 
-    await dispatch(createNewPlaylist(payload));
+    const newPlaylist = await dispatch(createNewPlaylist(payload)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        } else if (data && data.message) {
+          setErrors([data.message]);
+        }
+      }
+    );
 
-    history.push("/playlists");
+    if (newPlaylist) {
+      history.push("/playlists");
+    }
   };
 
   return (
@@ -33,6 +45,11 @@ function CreatePlaylistPage() {
       <Navigation user={sessionUser} />
       CreatePlaylistPage
       <form onSubmit={handleCreatePlaylist}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
         <label htmlFor="nameOfPlaylist">Title</label>
         <input
           type="text"

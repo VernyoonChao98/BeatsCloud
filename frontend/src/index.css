@@ -222,13 +222,152 @@ body {
   align-items: center;
 }
 
+.navigationText {
+  text-decoration: none;
+  color: white;
+}
+
 #noTopBorder {
   border: 0;
 }
 
-.navigationText {
+/* DiscoverPage --------------------------------------------*/
+
+.allSongs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.songCards {
+  display: flex;
+  height: 200px;
+  width: 308px;
+  background-color: #f2f2f2;
+  border: 1px solid #333;
+  border-radius: 50px;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 6px;
+}
+
+.songCardsSongName {
   text-decoration: none;
-  color: white;
+  margin: 0px;
+  inline-size: 300px;
+  overflow-wrap: break-word;
+  text-align: center;
+  word-wrap: wrap;
+  color: black;
+}
+
+.songCardsSongName > p {
+  margin: 0px;
+}
+
+.songCardsSongName:hover {
+  color: red;
+  background-color: white;
+  border: 1px solid #333;
+  border-radius: 50px;
+}
+
+.playSong {
+  border: 2px solid rgba(255, 85, 0, 1);
+  height: 40px;
+  width: 100px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.playSong:active {
+  background-color: rgba(46, 45, 45, 0.5);
+}
+
+.playlistInfoDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+.addToPlaylistForm {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+}
+
+#addToPlaylistButton {
+  border: 1px solid black;
+}
+
+.selects {
+  margin-top: 5px;
+  width: 150px;
+  background-color: #f2f2f2;
+}
+
+.options {
+  background-color: #f2f2f2;
+}
+
+/* myHome Page ------------------------------------------------- */
+
+.allSongsMyPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.allIndividualSongs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+  padding: 3px;
+}
+
+/* playlistpage ------------------------------------- */
+
+.playlistContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.playlistName {
+  text-decoration: none;
+  margin: 0px;
+  inline-size: 300px;
+  overflow-wrap: break-word;
+  text-align: center;
+  word-wrap: wrap;
+  color: black;
+  width: fit-content;
+  height: fit-content;
+  width: 300px;
+}
+
+.playlistName:hover {
+  color: red;
+  background-color: white;
+  border: 1px solid #333;
+  border-radius: 50px;
+}
+
+.playlistName > p {
+  margin: 10px 10px;
+}
+
+.createPlaylistButton {
+  width: 200px;
+}
+
+.songsUnderPlaylist {
+  width: 300px;
+  inline-size: 300px;
+  margin: 0px;
+  overflow-wrap: break-word;
 }
 
 #audio {

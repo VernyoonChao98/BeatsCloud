@@ -19,7 +19,7 @@ const validateSong = [
 ];
 
 const validateEditSong = [
-  check("title")
+  check("songTitle")
     .exists({ checkFalsy: true })
     .isLength({ max: 50 })
     .withMessage("Too long of a Song Title"),
@@ -27,7 +27,9 @@ const validateEditSong = [
 ];
 
 router.get("/Songs", async (req, res) => {
-  const songs = await db.Song.findAll();
+  const songs = await db.Song.findAll({
+    include: [{ model: db.User }, { model: db.Comment }],
+  });
   return res.json(songs);
 });
 
@@ -42,7 +44,6 @@ router.post(
         req.file.mimetype === "video/mp3" ||
         req.file.mimetype === "audio/mpeg"
       ) {
-        console.log(req.body);
         const file = req.file;
         const songUrl = await singlePublicFileUpload(file);
         const songTitle = req.body.fileName;
@@ -57,6 +58,7 @@ router.post(
           albumId,
           songUrl,
         });
+
         if (newSong) await newSong.save();
         return res.json(newSong);
       } else {
@@ -76,10 +78,13 @@ router.put("/Songs", validateEditSong, async (req, res) => {
   const { songId, songTitle } = req.body;
   const songToEdit = await db.Song.findByPk(songId);
 
-  const response = await songToEdit.update({
+  const newSongEdit = await songToEdit.update({
     title: songTitle,
   });
-  return res.json(response);
+
+  if (newSongEdit) {
+    return res.json(newSongEdit);
+  }
 });
 
 router.delete("/Songs/:id", async (req, res) => {

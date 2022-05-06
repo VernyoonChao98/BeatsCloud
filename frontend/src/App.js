@@ -108,7 +108,10 @@ function App() {
       <>
         <Switch>
           <Route path="/" exact>
-            <Home audioFunction={audioFunction} />
+            <Home
+              audioFunction={audioFunction}
+              audioFunctionPlaylist={audioFunctionPlaylist}
+            />
           </Route>
           <Route path="/discover">
             <DiscoverPage audioFunction={audioFunction} />

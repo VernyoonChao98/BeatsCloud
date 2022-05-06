@@ -36,41 +36,58 @@ function DiscoverPage({ audioFunction }) {
       <div className="allSongs">
         {Object.values(songs).map((singleSong) => {
           return (
-            <div key={singleSong.id}>
-              <NavLink to={`/songs/${singleSong.id}`}>
-                {singleSong.title}
+            <div className="songCards" key={singleSong.id}>
+              <div className="songOwnerName">{singleSong.User.username}</div>
+              <NavLink
+                className="songCardsSongName"
+                to={`/songs/${singleSong.id}`}
+              >
+                <p>{singleSong.title}</p>
               </NavLink>
               <button
+                className="playSong"
                 key={singleSong.id}
                 onClick={(e) => {
                   audioFunction(singleSong);
                 }}
               >
-                Play Song
+                Play
               </button>
-              <form>
+              <form className="addToPlaylistForm">
+                <button
+                  className="button"
+                  id="addToPlaylistButton"
+                  onClick={async (e) =>
+                    await handleAddToPlaylist(e, singleSong)
+                  }
+                >
+                  Add to Playlist
+                </button>
                 <select
                   className="selects"
                   onChange={(e) => {
                     setSelectedPlaylist(e.target.value);
                   }}
                 >
-                  <option value={"null"}>Select a Playlist</option>
+                  <option className="options" value={"null"}>
+                    Select Playlist
+                  </option>
                   {Object.values(myPlaylists)
                     .filter(
                       (myPlaylist) => myPlaylist.userId === sessionUser.id
                     )
                     .map((myPlaylist) => {
                       return (
-                        <option key={myPlaylist.id} value={myPlaylist.id}>
+                        <option
+                          className="options"
+                          key={myPlaylist.id}
+                          value={myPlaylist.id}
+                        >
                           {myPlaylist.title}
                         </option>
                       );
                     })}
                 </select>
-                <button onClick={(e) => handleAddToPlaylist(e, singleSong)}>
-                  Add to Playlist
-                </button>
               </form>
             </div>
           );
