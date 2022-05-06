@@ -22,6 +22,12 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [song, setSong] = useState("");
+  const [playlist, setPlaylist] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSongName, setCurrentSongName] = useState(
+    "No Songs Currently Playing"
+  );
+  const [currentPlaylistSongNames, setCurrentPlaylistSongNames] = useState([]);
   const player = useRef();
 
   useEffect(async () => {
@@ -31,8 +37,57 @@ function App() {
   }, [dispatch]);
 
   const audioFunction = async (singleSong) => {
+    setCurrentSongName(singleSong.title);
     await setSong(`${singleSong.songUrl}`);
     player.current.audio.current.play(song);
+  };
+
+  const audioFunctionPlaylist = (singlePlaylist) => {
+    const playlistSongNames = singlePlaylist.Songs.map(
+      (SongObj) => SongObj.title
+    );
+    const playlistSongs = singlePlaylist.Songs.map(
+      (SongObj) => SongObj.songUrl
+    );
+
+    setCurrentPlaylistSongNames(playlistSongNames);
+    setPlaylist(playlistSongs);
+
+    setCurrentSongName(playlistSongNames[0]);
+    setSong(playlistSongs[0]);
+
+    setSong(playlistSongs[0]);
+    setCurrentIndex(0);
+  };
+
+  const handleClickPrev = (e) => {
+    const changeValue = currentIndex - 1;
+    setCurrentIndex(changeValue);
+    if (!playlist[changeValue]) {
+      setCurrentIndex(playlist.length - 1);
+      setCurrentSongName(
+        currentPlaylistSongNames[currentPlaylistSongNames.length - 1]
+      );
+      setSong(playlist[playlist.length - 1]);
+    } else {
+      setCurrentSongName(currentPlaylistSongNames[changeValue]);
+      setSong(playlist[changeValue]);
+    }
+    return;
+  };
+
+  const handleClickNext = (e) => {
+    const changeValue = currentIndex + 1;
+    setCurrentIndex(changeValue);
+    if (!playlist[changeValue]) {
+      setCurrentIndex(0);
+      setCurrentSongName(currentPlaylistSongNames[0]);
+      setSong(playlist[0]);
+    } else {
+      setCurrentSongName(currentPlaylistSongNames[changeValue]);
+      setSong(playlist[changeValue]);
+    }
+    return;
   };
 
   return (
@@ -55,7 +110,7 @@ function App() {
             <EditSongPage />
           </Route>
           <Route path="/playlists" exact>
-            <PlaylistsPage />
+            <PlaylistsPage audioFunctionPlaylist={audioFunctionPlaylist} />
           </Route>
           <Route path="/playlists/create">
             <CreatePlaylistPage />
@@ -72,6 +127,14 @@ function App() {
             ref={player}
             volume={0.1}
             layout="horizontal-reverse"
+            showSkipControls={true}
+            showJumpControls={false}
+            onClickPrevious={(e) => handleClickPrev()}
+            onClickNext={(e) => handleClickNext()}
+            onEnded={() => handleClickNext()}
+            autoPlayAfterSrcChange={true}
+            header={`Playing: ${currentSongName}`}
+            customAdditionalControls={[]}
           />
         </footer>
       </>
