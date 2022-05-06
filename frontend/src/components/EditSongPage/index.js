@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, Redirect } from "react-router-dom";
-import { editNewSong } from "../../store/audioFile";
+import { useParams, Redirect } from "react-router-dom";
 import {
   createComment,
   loadAllComments,
@@ -14,13 +13,11 @@ import EditSongForm from "./EditSongForm";
 
 function EditSongPage() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const songId = useParams().id;
   const sessionUser = useSelector((state) => state.session.user);
   const song = useSelector((state) => state.audioFile[songId]);
   const comments = useSelector((state) => state.comment);
   const [showModal, setShowModal] = useState(false);
-  const [songTitle, setSongTitle] = useState(`${song.title}`);
   const [comment, setComment] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -28,7 +25,7 @@ function EditSongPage() {
     dispatch(loadAllComments(song)).then(() => {
       setIsLoaded(true);
     });
-  }, [dispatch]);
+  }, [dispatch, song]);
 
   if (!sessionUser) return <Redirect to="/" />;
 
