@@ -9,25 +9,18 @@ import { deleteOldSong } from "../../store/audioFile";
 import Navigation from "../Navigation";
 import "./MyHome.css";
 
-function MyHome() {
+function MyHome({ audioFunction }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.audioFile);
-  const [song, setSong] = useState("");
-  const player = useRef();
   if (!sessionUser) return <Redirect to="/" />;
-
-  const audiofunction = async (singleSong) => {
-    await setSong(`${singleSong.songUrl}`);
-    player.current.audio.current.play(song);
-  };
 
   const handleDelete = (singleSong) => {
     dispatch(deleteOldSong(singleSong));
   };
 
   return (
-    <div className="wholeContent">
+    <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
       <div className="allSongs">
         {Object.values(songs).map((singleSong) => {
@@ -42,7 +35,7 @@ function MyHome() {
               <button
                 key={`${singleSong.id}SongPlay`}
                 onClick={(e) => {
-                  audiofunction(singleSong);
+                  audioFunction(singleSong);
                 }}
               >
                 Play Song
@@ -61,16 +54,6 @@ function MyHome() {
           );
         })}
       </div>
-      <footer id="footer">
-        <AudioPlayer
-          id="musicPlayer"
-          src={`${song}`}
-          onPlay={(e) => console.log("Playing")}
-          ref={player}
-          volume={0.1}
-          layout="horizontal-reverse"
-        />
-      </footer>
     </div>
   );
 }

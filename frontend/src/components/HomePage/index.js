@@ -17,6 +17,15 @@ function Home() {
       <SoundCloudTeaser />
       <AltSignUp />
       <Footer />
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
+      <p>asdasdasda</p>
     </div>
   );
 }

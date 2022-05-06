@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { restoreUser } from "./store/session";
 import { loadAllSongs } from "./store/audioFile";
 import { loadAllPlaylist } from "./store/playlists";
+
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 
 import Home from "./components/HomePage";
 import PersonalHome from "./components/MyHome";
@@ -18,11 +21,19 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const [song, setSong] = useState("");
+  const player = useRef();
+
   useEffect(async () => {
     await dispatch(loadAllSongs());
     await dispatch(loadAllPlaylist());
     dispatch(restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  const audioFunction = async (singleSong) => {
+    await setSong(`${singleSong.songUrl}`);
+    player.current.audio.current.play(song);
+  };
 
   return (
     isLoaded && (
@@ -32,10 +43,10 @@ function App() {
             <Home />
           </Route>
           <Route path="/discover">
-            <DiscoverPage />
+            <DiscoverPage audioFunction={audioFunction} />
           </Route>
           <Route path="/myHome">
-            <PersonalHome />
+            <PersonalHome audioFunction={audioFunction} />
           </Route>
           <Route path="/upload">
             <UploadPage />
@@ -53,6 +64,16 @@ function App() {
             <EditPlaylistPage />
           </Route>
         </Switch>
+        <footer id="footer">
+          <AudioPlayer
+            id="musicPlayer"
+            src={`${song}`}
+            onPlay={(e) => console.log("Playing")}
+            ref={player}
+            volume={0.1}
+            layout="horizontal-reverse"
+          />
+        </footer>
       </>
     )
   );

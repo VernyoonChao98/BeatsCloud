@@ -45,7 +45,7 @@ function UploadButton() {
   };
 
   return (
-    <div className="wholeContent">
+    <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
       <form id="audio" onSubmit={handleSubmit}>
         <ul>

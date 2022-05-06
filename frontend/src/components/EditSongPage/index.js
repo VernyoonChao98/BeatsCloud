@@ -9,6 +9,9 @@ import {
   deleteComment,
 } from "../../store/comment";
 
+import { Modal } from "../../context/Modal";
+import EditSongForm from "./EditSongForm";
+
 function EditSongPage() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -16,6 +19,7 @@ function EditSongPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const song = useSelector((state) => state.audioFile[songId]);
   const comments = useSelector((state) => state.comment);
+  const [showModal, setShowModal] = useState(false);
   const [songTitle, setSongTitle] = useState(`${song.title}`);
   const [comment, setComment] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,16 +31,6 @@ function EditSongPage() {
   }, [dispatch]);
 
   if (!sessionUser) return <Redirect to="/" />;
-
-  const handleSongSubmit = async (e) => {
-    e.preventDefault();
-    const editSong = {
-      songId,
-      songTitle,
-    };
-    await dispatch(editNewSong(editSong));
-    history.push("/myHome");
-  };
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -59,22 +53,23 @@ function EditSongPage() {
 
   return (
     isLoaded && (
-      <div className="wholeContent">
+      <div id="noTopBorder" className="wholeContent">
         <Navigation user={sessionUser} />
-        <form onSubmit={handleSongSubmit}>
-          <label>
-            Title
-            <input
-              type="text"
-              name="title"
-              value={songTitle}
-              onChange={(e) => {
-                setSongTitle(e.target.value);
-              }}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <p>{song.title}</p>
+        <div>
+          <button
+            className="button"
+            id="createAccountButton"
+            onClick={() => setShowModal(true)}
+          >
+            Edit Song
+          </button>
+          {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+              <EditSongForm setShowModal={setShowModal} />
+            </Modal>
+          )}
+        </div>
         <p>Comments</p>
         {Object.values(comments).map((comment) => {
           return sessionUser.id === comment.userId ? (
