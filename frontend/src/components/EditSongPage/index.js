@@ -18,9 +18,12 @@ function EditSongPage() {
   const comments = useSelector((state) => state.comment);
   const [songTitle, setSongTitle] = useState(`${song.title}`);
   const [comment, setComment] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(loadAllComments(song));
+    dispatch(loadAllComments(song)).then(() => {
+      setIsLoaded(true);
+    });
   }, [dispatch]);
 
   if (!sessionUser) return <Redirect to="/" />;
@@ -48,7 +51,6 @@ function EditSongPage() {
 
   const handleDeleteComment = async (e, comment) => {
     e.preventDefault();
-    console.log(comment);
     const payload = {
       comment,
     };
@@ -56,61 +58,63 @@ function EditSongPage() {
   };
 
   return (
-    <div className="wholeContent">
-      <Navigation user={sessionUser} />
-      <form onSubmit={handleSongSubmit}>
-        <label>
-          Title
-          <input
-            type="text"
-            name="title"
-            value={songTitle}
-            onChange={(e) => {
-              setSongTitle(e.target.value);
-            }}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-      Comments
-      {Object.values(comments).map((comment) => {
-        return sessionUser.id === comment.userId ? (
-          <div key={comment.id}>
-            <div>{sessionUser.username}</div>
-            <p>{comment.context}</p>
-            <button
-              onClick={(e) => {
-                handleDeleteComment(e, comment);
+    isLoaded && (
+      <div className="wholeContent">
+        <Navigation user={sessionUser} />
+        <form onSubmit={handleSongSubmit}>
+          <label>
+            Title
+            <input
+              type="text"
+              name="title"
+              value={songTitle}
+              onChange={(e) => {
+                setSongTitle(e.target.value);
               }}
-            >
-              delete
-            </button>
-            <button>edit</button>
-          </div>
-        ) : (
-          <div key={comment.id}>
-            <div>User: {comment.User.username}</div>
-            <p>{comment.context}</p>
-            {comment.context}
-          </div>
-        );
-      })}
-      <form onSubmit={handleCommentSubmit}>
-        <label>
-          Comment
-          <input
-            type="text"
-            name="title"
-            required
-            value={comment}
-            onChange={(e) => {
-              setComment(e.target.value);
-            }}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+        <p>Comments</p>
+        {Object.values(comments).map((comment) => {
+          return sessionUser.id === comment.userId ? (
+            <div key={comment.id}>
+              <div>{sessionUser.username}</div>
+              <p>{comment.context}</p>
+              <button
+                onClick={(e) => {
+                  handleDeleteComment(e, comment);
+                }}
+              >
+                delete
+              </button>
+              <button>edit</button>
+            </div>
+          ) : (
+            <div key={comment.id}>
+              <div>User: {comment.User.username}</div>
+              <p>{comment.context}</p>
+              {comment.context}
+            </div>
+          );
+        })}
+        <form onSubmit={handleCommentSubmit}>
+          <label>
+            Comment
+            <input
+              type="text"
+              name="title"
+              required
+              value={comment}
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    )
   );
 }
 

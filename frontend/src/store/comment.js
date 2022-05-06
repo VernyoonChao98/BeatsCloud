@@ -4,7 +4,6 @@ const LOAD_COMMENTS = "/api/LOADCOMMENTS";
 const ADD_COMMENT = "/api/ADDCOMMENT";
 const DELETE_COMMENT = "/api/DELETECOMMENT";
 
-
 const loadComments = (comments) => ({
   type: LOAD_COMMENTS,
   comments,
@@ -62,9 +61,10 @@ export const deleteComment = (payload) => async (dispatch) => {
 const initialState = {};
 
 const commentReducer = (state = initialState, action) => {
-  const newState = { ...state };
+  let newState = { ...state };
   switch (action.type) {
     case LOAD_COMMENTS:
+      newState = {};
       action.comments.forEach((comment) => (newState[comment.id] = comment));
       return newState;
     case ADD_COMMENT:
