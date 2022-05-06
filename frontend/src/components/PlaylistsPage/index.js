@@ -23,7 +23,7 @@ function PlaylistsPage() {
   };
 
   return (
-    <div className="wholeContent">
+    <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
       PlaylistsPage
       {Object.values(playlists).map((singlePlaylist) => {

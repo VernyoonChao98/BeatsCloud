@@ -8,22 +8,14 @@ import "react-h5-audio-player/lib/styles.css";
 import Navigation from "../Navigation";
 import { createSongPlaylistAssociation } from "../../store/playlists";
 
-function DiscoverPage() {
+function DiscoverPage({ song, setIsLoaded, audioFunction, player }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.audioFile);
   const myPlaylists = useSelector((state) => state.playlist);
   const [selectedPlaylist, setSelectedPlaylist] = useState();
 
-  const [song, setSong] = useState("");
-  const player = useRef();
-
   if (!sessionUser) return <Redirect to="/" />;
-
-  const audiofunction = async (singleSong) => {
-    await setSong(`${singleSong.songUrl}`);
-    player.current.audio.current.play(song);
-  };
 
   const handleAddToPlaylist = (e, singleSong) => {
     e.preventDefault();
@@ -41,7 +33,7 @@ function DiscoverPage() {
   };
 
   return (
-    <div id="topBorder" className="wholeContent">
+    <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
       <div className="allSongs">
         {Object.values(songs).map((singleSong) => {
@@ -53,7 +45,7 @@ function DiscoverPage() {
               <button
                 key={singleSong.id}
                 onClick={(e) => {
-                  audiofunction(singleSong);
+                  audioFunction(singleSong);
                 }}
               >
                 Play Song
@@ -86,16 +78,6 @@ function DiscoverPage() {
           );
         })}
       </div>
-      <footer id="footer">
-        <AudioPlayer
-          id="musicPlayer"
-          src={`${song}`}
-          onPlay={(e) => console.log("Playing")}
-          ref={player}
-          volume={0.1}
-          layout="horizontal-reverse"
-        />
-      </footer>
     </div>
   );
 }
