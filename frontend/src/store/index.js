@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import audioReducer from "./audioFile";
 import playlistReducer from "./playlists";
+import commentReducer from "./comment";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   audioFile: audioReducer,
   playlist: playlistReducer,
+  comment: commentReducer,
 });
 
 let enhancer;

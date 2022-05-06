@@ -91,11 +91,11 @@ const initialState = {};
 const audioReducer = (state = initialState, action) => {
   const newState = { ...state };
   switch (action.type) {
-    case ADD_SONG:
-      return { ...state, [action.audioFile.id]: { ...action.audioFile } };
     case LOAD_SONGS:
       action.songs.forEach((song) => (newState[song.id] = song));
       return newState;
+    case ADD_SONG:
+      return { ...state, [action.audioFile.id]: { ...action.audioFile } };
     case EDIT_SONG:
       return { ...state, [action.song.id]: { ...action.song } };
     case DELETE_SONG:
