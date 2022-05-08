@@ -34,12 +34,96 @@ body {
 .button:hover {
   cursor: pointer;
 }
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
 /*  HomePage ---------------------------------    */
 
-.logo {
-  position: absolute;
+.loginFormContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: black;
+  border-radius: 20px;
+}
+
+.createFormContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: black;
+  border-radius: 20px;
+  text-align: center;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.loginFormContainer > h2 {
+  margin: 0px 0px 4px 0px;
+}
+
+.createFormContainer > h2 {
+  margin: 0px 0px 4px 0px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
+.createFormLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+}
+
+#emailInput {
+  border-radius: 5px;
+  margin-bottom: 5px;
+  width: 200px;
+}
+
+#usernameInput {
+  border-radius: 5px;
+  margin-bottom: 5px;
+  width: 200px;
+}
+
+#passwordInput {
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.errors {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px;
+}
+
+#logo {
   background-image: url("./images/BeatsCloud.png");
-  transform: translate(-550px, -190px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  width: 303px;
+  height: 46px;
+  padding-bottom: 10px;
+  margin: 0px;
 }
 
 /*  LogoTopImage ---------------------------------    */
@@ -215,16 +299,32 @@ body {
   font-weight: 100;
   font-size: 14px;
   line-height: 1.5;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: #333;
   color: white;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.navigationText {
-  text-decoration: none;
-  color: white;
+.navigationLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 310px;
+  height: 46px;
+}
+
+.profile-dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.username {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
 }
 
 #noTopBorder {
@@ -236,6 +336,8 @@ body {
 .allSongs {
   display: flex;
   flex-wrap: wrap;
+  background-color: #f2f2f2;
+  justify-content: center;
 }
 
 .songCards {
@@ -263,6 +365,10 @@ body {
 }
 
 .songCardsSongName > p {
+  margin: 0px;
+}
+
+.commentsNumber {
   margin: 0px;
 }
 
@@ -378,19 +484,13 @@ body {
   color: black;
 }
 
-#footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
 #createAccountForm {
   font-size: 28px;
   color: black;
 }
 
-#loginForm {
-  font-size: 28px;
+/* Upload Page ------------------------------------------*/
+
+#audio {
   color: black;
 }

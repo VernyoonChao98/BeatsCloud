@@ -12,10 +12,7 @@ function MyHome({ audioFunction }) {
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.audioFile);
   const myPlaylists = useSelector((state) => state.playlist);
-  const [selectedPlaylist, setSelectedPlaylist] = useState();
-
-  
-
+  const [selectedPlaylist, setSelectedPlaylist] = useState("");
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -29,13 +26,17 @@ function MyHome({ audioFunction }) {
       playlistId: parseInt(selectedPlaylist),
       song: singleSong,
     };
-    if (selectedPlaylist) {
+    if (
+      !selectedPlaylist ||
+      selectedPlaylist === null ||
+      selectedPlaylist === "" ||
+      selectedPlaylist === "null"
+    ) {
+      console.log("this is not a valid playlist");
+    } else {
       dispatch(createSongPlaylistAssociation(payload));
     }
-    if (!selectedPlaylist) {
-      console.log("this is not a valid playlist");
-    }
-    setSelectedPlaylist();
+    setSelectedPlaylist("");
   };
 
   return (
@@ -65,6 +66,7 @@ function MyHome({ audioFunction }) {
                 </button>
                 <select
                   className="selects"
+                  value={selectedPlaylist}
                   onChange={(e) => {
                     setSelectedPlaylist(e.target.value);
                   }}

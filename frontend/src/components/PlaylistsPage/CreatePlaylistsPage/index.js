@@ -17,7 +17,6 @@ function CreatePlaylistPage() {
 
   const handleCreatePlaylist = async (e) => {
     e.preventDefault();
-    console.log(sessionUser.id);
     const userId = sessionUser.id;
     const payload = {
       userId,

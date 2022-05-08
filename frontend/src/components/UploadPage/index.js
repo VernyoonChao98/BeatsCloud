@@ -54,13 +54,6 @@ function UploadButton() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label htmlFor="audio">Choose a mp3/mp4 file</label>
-        <input
-          type="file"
-          name="audio"
-          onChange={handleChange}
-          accept=".mp3, .mp4"
-        />
         <label htmlFor="nameOfAudioFile">Title</label>
         <input
           type="text"
@@ -68,6 +61,13 @@ function UploadButton() {
           value={fileName}
           required
           onChange={(e) => setFileName(e.target.value)}
+        />
+        <label htmlFor="audio">Choose a mp3/mp4 file</label>
+        <input
+          type="file"
+          name="audio"
+          onChange={handleChange}
+          accept=".mp3, .mp4"
         />
         <button type="submit">Submit</button>
       </form>

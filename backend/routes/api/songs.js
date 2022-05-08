@@ -59,8 +59,10 @@ router.post(
           songUrl,
         });
 
-        if (newSong) await newSong.save();
-        return res.json(newSong);
+        if (newSong) {
+          await newSong.save();
+          return res.json(newSong);
+        }
       } else {
         // throws an error if file type is not mp3/mp4
         const err = new Error("Invalid File Type.");

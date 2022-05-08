@@ -7,7 +7,6 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 router.get("/:id", async (req, res, next) => {
-  console.log("hello from back end");
   const songId = req.params.id;
 
   const allComments = await db.Comment.findAll({
@@ -20,8 +19,6 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  console.log("hello from backend");
-
   const { sessionUser, comment, song } = req.body;
 
   const userId = sessionUser.id;
@@ -41,10 +38,8 @@ router.post("/", async (req, res, next) => {
 });
 
 router.delete("/:id", async (req, res, next) => {
-  console.log("hello from backend");
   let commentId = req.params.id;
   commentId = parseInt(commentId);
-  console.log(commentId);
 
   const oldComment = await db.Comment.findByPk(commentId);
 
