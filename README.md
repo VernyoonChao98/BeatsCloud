@@ -17,4 +17,4 @@
 <br />
 
 <div align="center">
-![image](https://user-images.githubusercontent.com/29737123/167352343-455d7fec-5261-4be8-8ac1-05b0c0a773a2.png)
+  <img src="https://user-images.githubusercontent.com/29737123/167352343-455d7fec-5261-4be8-8ac1-05b0c0a773a2.png" />
