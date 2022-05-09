@@ -24,7 +24,7 @@
      
 ### Discover Page
      
-
+  <img src="![DiscoverPage](https://user-images.githubusercontent.com/29737123/167355987-529a36cf-93aa-42a5-bcfd-e34545cfad6d.png)" />
 
 
 ### Built With
