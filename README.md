@@ -57,4 +57,32 @@
 <a href="https://www.linkedin.com/in/vernyoon-chao-783494123/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
 <a href="https://github.com/VernyoonChao98"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
      
+## How to set up
 
+1. Clone this repository
+
+    `git clone git@github.com:celestewinterton/guestly.git`
+
+2. CD into the frontend and backend folders to install all dependencies
+
+    `npm install`
+
+3. In the backend directory, create a .env file, using the .env.example and update the password. To generate a new JWT_SECRET, run command:
+
+    `openssl rand -base64 10`
+
+4.  Create a user with the information from the .env file
+ 
+    `psql -c "CREATE USER guestly_app PASSWORD '<password>' CREATEDB"`
+
+5. Create the database, migrate and seed
+
+    `npx dotenv sequelize db:create`
+
+    `npx dotenv sequelize db:migrate`
+
+    `npx dotenv sequelize db:seed:all`
+
+6. In each of the frontend and backend directories, start the servers
+ 
+    `npm start`
