@@ -33,15 +33,14 @@ function Trending({ audioFunction, audioFunctionPlaylist }) {
           {trendingSongs?.map((song) => {
             return (
               <div key={`${song?.id}TrendingSong`} className="trendingSongs">
-                {song?.title}
-                <button
+                <p>{song?.title}</p>
+                <div
+                  className="playTrendingSong"
                   key={song?.id}
                   onClick={(e) => {
                     audioFunction(song);
                   }}
-                >
-                  Play Song
-                </button>
+                ></div>
               </div>
             );
           })}
@@ -50,7 +49,7 @@ function Trending({ audioFunction, audioFunctionPlaylist }) {
             className="button"
             id="trendingButton"
           >
-            Play Trending Playlist
+            My favorite 12 Songs
           </button>
         </div>
       </div>

@@ -48,18 +48,13 @@ function DiscoverPage({ audioFunction }) {
               >
                 <p>{singleSong.title}</p>
               </NavLink>
-              <p className="commentsNumber">
-                Comments: {singleSong.Comments.length}
-              </p>
-              <button
+              <div
                 className="playSong"
                 key={singleSong.id}
                 onClick={(e) => {
                   audioFunction(singleSong);
                 }}
-              >
-                Play
-              </button>
+              ></div>
               <form className="addToPlaylistForm">
                 <button
                   className="button"

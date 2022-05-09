@@ -40,7 +40,7 @@ function CreatePlaylistPage() {
   };
 
   return (
-    <div className="wholeContent">
+    <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
       CreatePlaylistPage
       <form onSubmit={handleCreatePlaylist}>

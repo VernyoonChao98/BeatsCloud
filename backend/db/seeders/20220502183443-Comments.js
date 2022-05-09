@@ -12,8 +12,18 @@ module.exports = {
       "Comments",
       [
         {
-          context: "hello from here",
+          context: "This is a great Song",
           userId: 1,
+          songId: 1,
+        },
+        {
+          context: "FIRE!!!!!!!",
+          userId: 2,
+          songId: 1,
+        },
+        {
+          context: "GET OUTA HERE",
+          userId: 3,
           songId: 1,
         },
       ],

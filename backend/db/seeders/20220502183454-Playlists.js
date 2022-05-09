@@ -12,8 +12,8 @@ module.exports = {
       "Playlists",
       [
         {
-          title: "buttman",
-          userId: 1,
+          title: "Personal Playlist",
+          userId: 4,
         },
       ],
       {}

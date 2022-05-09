@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { editNewSong } from "../../../store/audioFile";
+import { editNewSong, loadAllSongs } from "../../../store/audioFile";
 
 function EditSongForm({ setShowModal }) {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ function EditSongForm({ setShowModal }) {
     );
 
     if (newEditSong) {
+      await dispatch(loadAllSongs());
       setShowModal(false);
     }
   };
