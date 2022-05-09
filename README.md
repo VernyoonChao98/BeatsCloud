@@ -1,5 +1,5 @@
-<div align="center">
-  <h3 align="center">BeatsCloud</h3>
+
+<h3 align="center">BeatsCloud</h3>
   
 <p align="center">
     BeatsCloud is where you can freely upload your music for free to share with the community. Users can freely share eachothers music and view eachothers music. Users will be able to interact with eachother and share your thoughts. Ready to share your music? Sign up today.
