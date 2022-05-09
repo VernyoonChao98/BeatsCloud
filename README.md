@@ -61,7 +61,7 @@
 
 1. Clone this repository
 
-    `git clone git@github.com:celestewinterton/guestly.git`
+  
 
 2. CD into the frontend and backend folders to install all dependencies
 
