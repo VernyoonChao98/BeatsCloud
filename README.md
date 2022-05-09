@@ -9,8 +9,6 @@
     <br />
     <a href="https://beatscloud.herokuapp.com/">View Demo</a>
     ·
-    <a href="">Report Bug</a>
-    ·
-    <a href="">Request Feature</a>
+    <a href="https://github.com/VernyoonChao98/BeatsCloud/issues">Report Bug</a>
   </p>
 </div>
