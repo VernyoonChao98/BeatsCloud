@@ -22,11 +22,17 @@
    <p align="center">
     BeatsCloud is a clone of soundcloud with the necessary features of uploading your own music to your own profile. You can share and discover the wide range of different music out there. You can interact with the community by sharing songs or writing a comment to show your appreciation.
 
+---
+
+
 ### Built With
 
 * [React.js](https://reactjs.org/)
 * [Redux](https://redux.js.org/)
 * [Javascript](https://www.javascript.com/)
+* [Flask](https://flask.palletsprojects.com/en/2.0.x/)
+* [Python](https://www.python.org/)
 * [PostgreSQL](https://www.postgresql.org/)
+* [NHL API](https://github.com/dword4/nhlapi)
 * [HTML]()
 * [CSS]()
