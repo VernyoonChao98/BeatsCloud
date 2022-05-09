@@ -32,28 +32,45 @@ function Navigation({ user }) {
   return (
     <div className="navigation">
       <NavLink exact to="/discover">
-        <p className="navigationText">Discover Logo Eventually</p>
+        <p className="navigationText" id="logo"></p>
       </NavLink>
-      <NavLink exact to="/myHome">
-        <p className="navigationText">Home</p>
+      <NavLink
+        className="navigationLink"
+        exact
+        style={{ textDecoration: "none", color: "white" }}
+        activeStyle={{ backgroundColor: "#111" }}
+        to="/myHome"
+      >
+        MySongs
       </NavLink>
-      <NavLink exact to="/playlists">
-        <p className="navigationText">Library</p>
+      <NavLink
+        className="navigationLink"
+        exact
+        style={{ textDecoration: "none", color: "white" }}
+        activeStyle={{ backgroundColor: "#111" }}
+        to="/playlists"
+      >
+        Playlist
       </NavLink>
-      <NavLink exact to="/upload">
-        <p className="navigationText">Upload</p>
+      <NavLink
+        className="navigationLink"
+        exact
+        style={{ textDecoration: "none", color: "white" }}
+        activeStyle={{ backgroundColor: "#111" }}
+        to="/upload"
+      >
+        Upload
       </NavLink>
-      <button onClick={openMenu}>
+      <button className="username" onClick={openMenu}>
         <i className="fas fa-user-circle" />
+        <div>{user.username}</div>
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logoutEvent}>Log Out</button>
-          </li>
-        </ul>
+        <div className="profile-dropdown">
+          <button className="button" onClick={logoutEvent}>
+            Log Out
+          </button>
+        </div>
       )}
     </div>
   );

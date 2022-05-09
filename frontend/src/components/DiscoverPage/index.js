@@ -11,7 +11,7 @@ function DiscoverPage({ audioFunction }) {
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.audioFile);
   const myPlaylists = useSelector((state) => state.playlist);
-  const [selectedPlaylist, setSelectedPlaylist] = useState();
+  const [selectedPlaylist, setSelectedPlaylist] = useState("");
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -21,13 +21,17 @@ function DiscoverPage({ audioFunction }) {
       playlistId: parseInt(selectedPlaylist),
       song: singleSong,
     };
-    if (selectedPlaylist) {
+    if (
+      !selectedPlaylist ||
+      selectedPlaylist === null ||
+      selectedPlaylist === "" ||
+      selectedPlaylist === "null"
+    ) {
+      console.log("this is not a valid playlist");
+    } else {
       dispatch(createSongPlaylistAssociation(payload));
     }
-    if (!selectedPlaylist) {
-      console.log("this is not a valid playlist");
-    }
-    setSelectedPlaylist();
+    setSelectedPlaylist("");
   };
 
   return (
@@ -44,15 +48,13 @@ function DiscoverPage({ audioFunction }) {
               >
                 <p>{singleSong.title}</p>
               </NavLink>
-              <button
+              <div
                 className="playSong"
                 key={singleSong.id}
                 onClick={(e) => {
                   audioFunction(singleSong);
                 }}
-              >
-                Play
-              </button>
+              ></div>
               <form className="addToPlaylistForm">
                 <button
                   className="button"
@@ -65,6 +67,7 @@ function DiscoverPage({ audioFunction }) {
                 </button>
                 <select
                   className="selects"
+                  value={selectedPlaylist}
                   onChange={(e) => {
                     setSelectedPlaylist(e.target.value);
                   }}

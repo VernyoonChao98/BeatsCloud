@@ -31,51 +31,61 @@ function SignupFormPage() {
   };
 
   return (
-    <div id="createAccountForm">
-      <h1>Create account</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+    <div className="createFormContainer">
+      <h2>Create Account</h2>
+      <form className="loginForm" onSubmit={handleSubmit}>
+        <div className="errors">
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <div key={idx}>{error}</div>
           ))}
-        </ul>
-        <label>
-          Email
+        </div>
+        <label className="createFormLabel" id="email">
+          Email Address
           <input
-            type="text"
+            id="emailInput"
+            type="email"
+            placeholder="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="createFormLabel">
           Username
           <input
+            id="usernameInput"
             type="text"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="createFormLabel">
           Password
           <input
+            id="passwordInput"
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="createFormLabel">
           Confirm Password
           <input
+            id="passwordInput"
             type="password"
+            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button className="button" type="submit">
+          Create account
+        </button>
       </form>
     </div>
   );

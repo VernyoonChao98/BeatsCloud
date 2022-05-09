@@ -41,6 +41,7 @@ export const loadAllSongs = () => async (dispatch) => {
 
 export const addNewSong = (audioFile) => async (dispatch) => {
   const formData = new FormData();
+  console.log(audioFile.file);
   formData.append("audio", audioFile.file);
   formData.append("fileName", audioFile.fileName);
   formData.append("userId", audioFile.userId);

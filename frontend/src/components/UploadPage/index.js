@@ -48,29 +48,41 @@ function UploadButton() {
   return (
     <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
-      <form id="audio" onSubmit={handleSubmit}>
-        <ul>
+      <div className="audioUploadContainer">
+        <form id="audio" onSubmit={handleSubmit}>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <div className="errors" key={idx}>
+              {error}
+            </div>
           ))}
-        </ul>
-        <label htmlFor="audio">Choose a mp3/mp4 file</label>
-        <input
-          type="file"
-          name="audio"
-          onChange={handleChange}
-          accept=".mp3, .mp4"
-        />
-        <label htmlFor="nameOfAudioFile">Title</label>
-        <input
-          type="text"
-          name="nameOfAudioFile"
-          value={fileName}
-          required
-          onChange={(e) => setFileName(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+          <label id="songTitle" htmlFor="nameOfAudioFile">
+            Song Title
+            <input
+              type="text"
+              name="nameOfAudioFile"
+              value={fileName}
+              required
+              onChange={(e) => setFileName(e.target.value)}
+            />
+          </label>
+          <div className="fileInput">
+            <label className="fileInput">
+              <div>Select a Song</div>
+              <input
+                type="file"
+                name="audio"
+                id="fileInput"
+                // style={{ display: "none" }}
+                onChange={handleChange}
+                accept=".mp3, .mp4"
+              />
+            </label>
+          </div>
+          <button className="button" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

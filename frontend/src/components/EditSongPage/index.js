@@ -52,7 +52,6 @@ function EditSongPage() {
     isLoaded && (
       <div id="noTopBorder" className="wholeContent">
         <Navigation user={sessionUser} />
-        <p>{song.title}</p>
         {sessionUser.id === song.userId ? (
           <div>
             <button
@@ -71,33 +70,53 @@ function EditSongPage() {
         ) : (
           <div></div>
         )}
-        <p>Comments</p>
-        {Object.values(comments).map((comment) => {
-          return sessionUser.id === comment.userId ? (
-            <div key={comment.id}>
-              <div>{sessionUser.username}</div>
-              <p>{comment.context}</p>
-              <button
-                onClick={(e) => {
-                  handleDeleteComment(e, comment);
-                }}
-              >
-                delete
-              </button>
-            </div>
-          ) : (
-            <div key={comment.id}>
-              <div>User: {comment.User.username}</div>
-              <p>{comment.context}</p>
-            </div>
-          );
-        })}
+        <p>{song.title}</p>
+        <container className="allComments">
+          {Object.values(comments).map((comment) => {
+            return sessionUser.id === comment.userId ? (
+              <div className="singleComment" key={comment.id}>
+                <div>
+                  <div className="usernameOwnerInfo">
+                    <div className="userNameCommentInfo">
+                      {sessionUser.username}
+                    </div>
+                    <div className="date">{comment.updatedAt.slice(0, 10)}</div>
+                  </div>
+                  <p className="commentText">{comment.context}</p>
+                </div>
+                <button
+                  className="button"
+                  id="deleteCommentButton"
+                  onClick={(e) => {
+                    handleDeleteComment(e, comment);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            ) : (
+              <div className="singleComment" key={comment.id}>
+                <div>
+                  <div className="usernameOwnerInfo">
+                    <div className="userNameCommentInfo">
+                      {comment.User.username}
+                    </div>
+                    <div className="date">{comment.updatedAt.slice(0, 10)}</div>
+                  </div>
+                  <p className="commentText">{comment.context}</p>
+                </div>
+              </div>
+            );
+          })}
+        </container>
         <form onSubmit={handleCommentSubmit}>
           <label>
             Comment
-            <input
+            <textarea
               type="text"
               name="title"
+              rows={5}
+              cols={100}
               required
               value={comment}
               onChange={(e) => {

@@ -17,7 +17,6 @@ function CreatePlaylistPage() {
 
   const handleCreatePlaylist = async (e) => {
     e.preventDefault();
-    console.log(sessionUser.id);
     const userId = sessionUser.id;
     const payload = {
       userId,
@@ -41,7 +40,7 @@ function CreatePlaylistPage() {
   };
 
   return (
-    <div className="wholeContent">
+    <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
       CreatePlaylistPage
       <form onSubmit={handleCreatePlaylist}>
