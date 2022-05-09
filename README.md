@@ -12,3 +12,8 @@
     <a href="https://github.com/VernyoonChao98/BeatsCloud/issues">Report Bug</a>
   </p>
 </div>
+
+## About The Project
+
+<br />
+<div align="center">
