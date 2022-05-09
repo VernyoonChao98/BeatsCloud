@@ -24,7 +24,19 @@
      
 ### Discover Page
      
-  ![DiscoverPage](https://user-images.githubusercontent.com/29737123/167355987-529a36cf-93aa-42a5-bcfd-e34545cfad6d.png)"
+  ![DiscoverPage](https://user-images.githubusercontent.com/29737123/167355987-529a36cf-93aa-42a5-bcfd-e34545cfad6d.png)
+     
+### My Songs
+     
+  ![MySongs](https://user-images.githubusercontent.com/29737123/167356099-b733a144-5362-4259-b38b-63c85976cc07.png)
+     
+### Playlist
+     
+  ![Your](https://user-images.githubusercontent.com/29737123/167356149-fed057c5-bb3b-4012-a020-6d9977053db1.png)
+
+### Upload
+     
+  ![Upload](https://user-images.githubusercontent.com/29737123/167356151-47ee70b0-e432-49bf-9cd8-2751a5b03f76.png)
 
 
 ### Built With
