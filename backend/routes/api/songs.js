@@ -1,7 +1,12 @@
 const express = require("express");
 const db = require("../../db/models");
 
-const { singleMulterUpload, singlePublicFileUpload } = require("../../awsS3");
+const {
+  singlePublicFileUpload,
+  multiplePublicFileUpload,
+  singleMulterUpload,
+  multipleMulterUpload,
+} = require("../../awsS3");
 
 require("dotenv").config();
 
@@ -55,7 +60,6 @@ router.post(
         const newSong = await db.Song.build({
           title: songTitle,
           userId,
-          albumId,
           songUrl,
         });
 
@@ -73,6 +77,94 @@ router.post(
       const err = new Error("Please Provide a File.");
       next(err);
     }
+  }
+);
+
+router.post(
+  "/MultipleSongs",
+  multipleMulterUpload("audios"),
+  async (req, res, next) => {
+    if (req.files) {
+      const albumName = req.body.albumName;
+      const userId = req.body.userId;
+      const newAlbum = await db.Album.build({
+        title: albumName,
+        userId,
+      });
+
+      if (newAlbum) {
+        await newAlbum.save();
+      }
+
+      // const newSongs = await multiplePublicFileUpload(req.files);
+
+      // for (let i = 0; i < newSongs.length; i++) {
+      //   console.log(req.files[i], newSongs[i]);
+      // }
+
+      req.files.forEach(async (file) => {
+        if (file) {
+          if (
+            file.mimetype === "video/mp4" ||
+            file.mimetype === "video/mp3" ||
+            file.mimetype === "audio/mpeg"
+          ) {
+            const songUrl = await singlePublicFileUpload(file);
+            const songTitle = file.originalname;
+            const albumId = newAlbum.id;
+
+            if (!albumId) {
+              albumId = null;
+            }
+
+            const newSong = await db.Song.build({
+              title: songTitle,
+              userId,
+              albumId,
+              songUrl,
+            });
+            if (newSong) {
+              await newSong.save();
+            }
+          }
+        }
+      });
+    }
+    // if (req.file) {
+    //   if (
+    //     req.file.mimetype === "video/mp4" ||
+    //     req.file.mimetype === "video/mp3" ||
+    //     req.file.mimetype === "audio/mpeg"
+    //   ) {
+    //     const file = req.file;
+    //     const songUrl = await singlePublicFileUpload(file);
+    //     const songTitle = req.body.fileName;
+    //     const userId = req.body.userId;
+    //     let albumId = req.body.albumId;
+    //     if (!albumId) {
+    //       albumId = null;
+    //     }
+    //     const newSong = await db.Song.build({
+    //       title: songTitle,
+    //       userId,
+    //       albumId,
+    //       songUrl,
+    //     });
+    //     if (newSong) {
+    //       await newSong.save();
+    //       return res.json(newSong);
+    //     }
+    //   } else {
+    //     // throws an error if file type is not mp3/mp4
+    //     const err = new Error("Invalid File Type.");
+    //     next(err);
+    //   }
+    // } else {
+    //   // throws an error if no file was provided
+    //   const err = new Error("Please Provide a File.");
+    //   next(err);
+    // }
+    return true;
   }
 );
 

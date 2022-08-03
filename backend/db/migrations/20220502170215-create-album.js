@@ -18,7 +18,6 @@ module.exports = {
         references: { model: "Users" },
       },
       imageUrl: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {

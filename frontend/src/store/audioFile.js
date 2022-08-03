@@ -41,7 +41,6 @@ export const loadAllSongs = () => async (dispatch) => {
 
 export const addNewSong = (audioFile) => async (dispatch) => {
   const formData = new FormData();
-  console.log(audioFile.file);
   formData.append("audio", audioFile.file);
   formData.append("fileName", audioFile.fileName);
   formData.append("userId", audioFile.userId);
@@ -60,6 +59,40 @@ export const addNewSong = (audioFile) => async (dispatch) => {
     dispatch(loadAllSongs());
     return true;
   }
+};
+
+export const addMultipleNewSongs = (payload) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("userId", payload.userId);
+  // console.log(payload.newSongNames);
+  formData.append("albumName", payload.albumName);
+
+  if (payload.multipleFiles && payload.multipleFiles !== 0) {
+    for (let i = 0; i < payload.multipleFiles.length; i++) {
+      // console.log(payload.multipleFiles[i]);
+      // console.log(payload.newSongNames[payload.multipleFiles[i].name]);
+      formData.append(
+        "audios",
+        payload.multipleFiles[i],
+        payload.newSongNames[payload.multipleFiles[i].name]
+      );
+    }
+  }
+
+  const response = await csrfFetch("/api/audio/MultipleSongs", {
+    method: "POST",
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
+  });
+
+  // if (response.ok) {
+  //   const newSong = await response.json();
+  //   dispatch(addSong(newSong));
+  //   dispatch(loadAllSongs());
+  //   return true;
+  // }
 };
 
 export const editNewSong = (songEdit) => async (dispatch) => {
