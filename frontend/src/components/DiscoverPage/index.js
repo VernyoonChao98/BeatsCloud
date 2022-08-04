@@ -6,6 +6,8 @@ import Navigation from "../Navigation";
 import { createSongPlaylistAssociation } from "../../store/playlists";
 import "./DiscoverPage.css";
 
+import CreatePlaylistModal from "../Modals/CreatePlaylistModal";
+
 function DiscoverPage({ audioFunction }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -37,7 +39,7 @@ function DiscoverPage({ audioFunction }) {
   return (
     <div id="noTopBorder" className="wholeContent">
       <Navigation user={sessionUser} />
-      <div className="allSongs">
+      {/* <div className="allSongs">
         {Object.values(songs).map((singleSong) => {
           return (
             <div className="songCards" key={singleSong.id}>
@@ -55,6 +57,7 @@ function DiscoverPage({ audioFunction }) {
                   audioFunction(singleSong);
                 }}
               ></div>
+              <CreatePlaylistModal />
               <form className="addToPlaylistForm">
                 <button
                   className="button"
@@ -95,7 +98,8 @@ function DiscoverPage({ audioFunction }) {
             </div>
           );
         })}
-      </div>
+      </div> */}
+      <div></div>
     </div>
   );
 }

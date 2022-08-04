@@ -8,8 +8,7 @@ import {
   deleteComment,
 } from "../../store/comment";
 
-import { Modal } from "../../context/Modal";
-import EditSongForm from "./EditSongForm";
+import EditSongModal from "./EditSongForm/EditSongModal.js";
 
 function EditSongPage() {
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ function EditSongPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const song = useSelector((state) => state.audioFile[songId]);
   const comments = useSelector((state) => state.comment);
-  const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -25,7 +23,7 @@ function EditSongPage() {
     dispatch(loadAllComments(song)).then(() => {
       setIsLoaded(true);
     });
-  }, [dispatch, song, isLoaded]);
+  }, [dispatch, song]);
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -52,26 +50,9 @@ function EditSongPage() {
     isLoaded && (
       <div id="noTopBorder" className="wholeContent">
         <Navigation user={sessionUser} />
-        {sessionUser.id === song.userId ? (
-          <div>
-            <button
-              className="button"
-              id="createAccountButton"
-              onClick={() => setShowModal(true)}
-            >
-              Edit Song
-            </button>
-            {showModal && (
-              <Modal onClose={() => setShowModal(false)}>
-                <EditSongForm setShowModal={setShowModal} />
-              </Modal>
-            )}
-          </div>
-        ) : (
-          <div></div>
-        )}
         <p>{song.title}</p>
-        <container className="allComments">
+        <EditSongModal />
+        <div className="allComments">
           {Object.values(comments).map((comment) => {
             return sessionUser.id === comment.userId ? (
               <div className="singleComment" key={comment.id}>
@@ -108,7 +89,7 @@ function EditSongPage() {
               </div>
             );
           })}
-        </container>
+        </div>
         <form onSubmit={handleCommentSubmit}>
           <label>
             Comment

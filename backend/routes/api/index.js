@@ -5,6 +5,7 @@ const songsRouter = require("./songs.js");
 const playlistsRouter = require("./playlists");
 const songplaylistRouter = require("./songplaylist");
 const commentsRouter = require("./comments");
+const albumsRouter = require("./albums.js");
 
 const asyncHandler = require("express-async-handler");
 const { setTokenCookie } = require("../../utils/auth.js");
@@ -17,6 +18,7 @@ router.use("/audio", songsRouter);
 router.use("/playlists", playlistsRouter);
 router.use("/songplaylists", songplaylistRouter);
 router.use("/comments", commentsRouter);
+router.use("/albums", albumsRouter);
 
 router.get(
   "/set-token-cookie",

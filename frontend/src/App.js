@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { restoreUser } from "./store/session";
 import { loadAllSongs } from "./store/audioFile";
 import { loadAllPlaylist } from "./store/playlists";
+import { loadAllAlbums } from "./store/albums";
 
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
@@ -33,9 +34,13 @@ function App() {
   const player = useRef();
 
   useEffect(() => {
-    dispatch(loadAllSongs());
-    dispatch(loadAllPlaylist());
-    dispatch(restoreUser()).then(() => setIsLoaded(true));
+    dispatch(loadAllSongs()).then(() => {
+      dispatch(loadAllPlaylist()).then(() => {
+        dispatch(loadAllAlbums()).then(() => {
+          dispatch(restoreUser()).then(() => setIsLoaded(true));
+        });
+      });
+    });
   }, [dispatch]);
 
   const audioFunction = async (singleSong) => {
@@ -113,25 +118,25 @@ function App() {
               audioFunctionPlaylist={audioFunctionPlaylist}
             />
           </Route>
-          <Route path="/discover">
+          <Route path="/discover" exact>
             <DiscoverPage audioFunction={audioFunction} />
           </Route>
-          <Route path="/myHome">
+          <Route path="/myHome" exact>
             <PersonalHome audioFunction={audioFunction} />
           </Route>
-          <Route path="/upload">
+          <Route path="/upload" exact>
             <UploadPage />
           </Route>
-          <Route path="/songs/:id">
+          <Route path="/songs/:id" exact>
             <EditSongPage />
           </Route>
           <Route path="/playlists" exact>
             <PlaylistsPage audioFunctionPlaylist={audioFunctionPlaylist} />
           </Route>
-          <Route path="/playlists/create">
+          <Route path="/playlists/create" exact>
             <CreatePlaylistPage />
           </Route>
-          <Route path="/playlists/:id">
+          <Route path="/playlists/:id" exact>
             <EditPlaylistPage />
           </Route>
         </Switch>

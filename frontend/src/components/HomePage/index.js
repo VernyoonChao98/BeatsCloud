@@ -8,26 +8,26 @@ import AltSignUp from "./AltSignUp";
 import { loadAllSongs } from "../../store/audioFile";
 
 function Home({ audioFunction, audioFunctionPlaylist }) {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const dispatch = useDispatch();
+  // const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    dispatch(loadAllSongs()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadAllSongs()).then(() => setIsLoaded(true));
+  // }, [dispatch]);
 
   return (
-    isLoaded && (
-      <div className="wholeContent">
-        <TopImage />
-        <SearchArea />
-        <Trending
-          audioFunction={audioFunction}
-          audioFunctionPlaylist={audioFunctionPlaylist}
-        />
-        <MobileImage />
-        <AltSignUp />
-      </div>
-    )
+    // isLoaded && (
+    <div className="wholeContent">
+      <TopImage />
+      <SearchArea />
+      <Trending
+        audioFunction={audioFunction}
+        audioFunctionPlaylist={audioFunctionPlaylist}
+      />
+      <MobileImage />
+      <AltSignUp />
+    </div>
+    // )
   );
 }
 
