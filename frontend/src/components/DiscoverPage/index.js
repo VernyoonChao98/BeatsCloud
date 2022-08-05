@@ -99,7 +99,7 @@ function DiscoverPage({ audioFunction }) {
           );
         })}
       </div> */}
-      <div></div>
+      <div ></div>
     </div>
   );
 }

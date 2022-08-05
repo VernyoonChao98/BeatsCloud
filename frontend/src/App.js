@@ -19,6 +19,7 @@ import CreatePlaylistPage from "./components/PlaylistsPage/CreatePlaylistsPage";
 import EditPlaylistPage from "./components/EditPlaylistPage";
 
 import "./index.css";
+import UserPage from "./components/UserProfilePage/UserPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -138,6 +139,9 @@ function App() {
           </Route>
           <Route path="/playlists/:id" exact>
             <EditPlaylistPage />
+          </Route>
+          <Route path="/userprofile/:id">
+            <UserPage />
           </Route>
         </Switch>
         <footer id="footer">
